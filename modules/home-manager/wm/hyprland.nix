@@ -84,7 +84,7 @@ in {
           "$mod, G, togglegroup,"                       # toggle the window between focus and group
           "$mod, F, fullscreen,"                        # toggle the window between focus and fullscreen
           "$mod, P, exec, ${pinScript}/bin/pin"        # toggle pin on focused window
-          "$mainMod, B, exec, hyprctl setprop active opaque toggle" # toggle opaque on window
+          "$mod, B, exec, hyprctl setprop active opaque toggle" # toggle opaque on window
           "Control_L, ESCAPE, exec, killall waybar || waybar" # toggle waybar
           # TODO : zen mode
           # TODO : logout

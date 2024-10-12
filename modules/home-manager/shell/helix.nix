@@ -76,10 +76,8 @@
         }
         {
           name = "bash";
-          formatter = {
-            command = "shfmt";
-            args = ["-l" "-w"];
-          };
+          auto-format = true;
+          formatter.command = "shfmt";
         }
         {
           name = "go";
