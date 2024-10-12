@@ -8,8 +8,15 @@
   ];
 
   home.packages = with pkgs; [
-    kitty
     lazygit
+    btop
+    eza
+    fastfetch
+    gdu
+    nvtopPackages.full
+    pokemon-colorscripts-mac
+    powertop
+    zoxide
   ];
 
   programs.lazygit = {

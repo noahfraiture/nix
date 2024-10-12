@@ -4,6 +4,8 @@
   imports = [
     ./shell/default.nix
     ./wm/default.nix
-    ./gui/default.nix
+    ./gui.nix
+    ./development.nix
+    ./languages.nix
   ];
 }
