@@ -3,10 +3,10 @@
 {
   imports = [
     ./hyprland.nix
+    ./waybar.nix
   ];
 
   home.packages = with pkgs; [
-    waybar
     eww
     dunst
     libnotify
