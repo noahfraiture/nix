@@ -83,6 +83,7 @@
         }
         {
           name = "go";
+          auto-format = true;
           formatter.command = "goimports";
         }
         {
@@ -97,15 +98,19 @@
 
   home.packages = with pkgs; [
     helix
-    # TODO : install go
-    jdt-language-server # lsp java
-    clang-tools         # lsp C
-    nil                 # lsp nix, NOTE: no formatter since it's ugly
-    rust-analyzer       # lsp rust
-    rustfmt             # formatter rust
-    pyright             # lsp python
-    black               # formatter python
-    shfmt               # formatter bash
-    marksman            # lsp markdown
+    clang-tools              # lsp C
+    nil                      # lsp nix, NOTE: no formatter since it's ugly
+    rust-analyzer            # lsp rust
+    rustfmt                  # formatter rust
+    pyright                  # lsp python
+    black                    # formatter python
+    bash-language-server     # formatter bash
+    shfmt                    # formatter bash
+    marksman                 # lsp markdown
+
+    gopls                    # lsp go
+    gotools                  # contains goimports formatter go
+    golangci-lint            # linter go
+    golangci-lint-langserver # lsp needed for the go linter
   ];
 }
