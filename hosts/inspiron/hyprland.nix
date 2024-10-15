@@ -3,8 +3,6 @@
   inputs,
   ...
 }: {
-
-
   config = {
     nix.settings = {
       substituters = ["https://hyprland.cachix.org"];

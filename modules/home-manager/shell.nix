@@ -19,7 +19,7 @@
   programs.lazygit = {
     enable = true;
     settings = {
-      os.editPreset = "helix";
+      os.editPreset = "hx";
       services."github.com" = "github:github.com";
       notARepository = "skip";
     };

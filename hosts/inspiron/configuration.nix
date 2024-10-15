@@ -31,22 +31,8 @@
   };
   services.getty.autologinUser = "noah";
 
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    wget
-    nushell
-  ];
-
   # Man page completion
   documentation.man.generateCaches = true;
-
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    nerdfonts
-  ];
 
   home-manager = {
     backupFileExtension = "bak";
@@ -58,6 +44,7 @@
         ../../modules/home-manager/gui.nix
         ../../modules/home-manager/helix.nix
         ../../modules/home-manager/hyprland.nix
+        ../../modules/home-manager/hyprpanel.nix
         ../../modules/home-manager/kitty.nix
         ../../modules/home-manager/languages.nix
         ../../modules/home-manager/shell.nix

@@ -10,18 +10,24 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-
-    # TODO : see hyprspace
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-  
+  outputs = { self, nixpkgs, ... }@inputs:
+  {
     nixosConfigurations = {
       inspiron = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
+        system = "x86_64-linux";
         modules = [
+          {
+            nixpkgs.overlays = [ inputs.hyprpanel.overlay ];
+            _module.args = { inherit inputs; };
+          }
           ./hosts/inspiron/configuration.nix
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager
+          inputs.stylix.nixosModules.stylix
         ];
       };
       # add here other machines
