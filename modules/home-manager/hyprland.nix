@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, ... }:
 
 let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
@@ -28,6 +28,10 @@ let
   term = "kitty";
   browser = "opera";
 
+  playerctl = "${pkgs.playerctl}/bin/playerctl";
+  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+  pactl = "${pkgs.pulseaudio}/bin/pactl";
+
 in {
   config = {
 
@@ -35,7 +39,11 @@ in {
       enable = true;
 
       settings = {
-        exec-once = ''${startupScript}/bin/start'';
+        exec-once = [
+          ''${startupScript}/bin/start''
+          "ags -b hypr"
+          "hyprctl setcursor Qogir 24"
+        ];
       
         input = {
           kb_options = "caps:swapescape";
@@ -83,15 +91,15 @@ in {
           "$mod, W, togglefloating,"                    # toggle the window between focus and float
           "$mod, G, togglegroup,"                       # toggle the window between focus and group
           "$mod, F, fullscreen,"                        # toggle the window between focus and fullscreen
-          "$mod, P, exec, ${pinScript}/bin/pin"        # toggle pin on focused window
+          ''$mod, P, exec, ${pinScript}/bin/pin''        # toggle pin on focused window
           "$mod, B, exec, hyprctl setprop active opaque toggle" # toggle opaque on window
           "Control_L, ESCAPE, exec, killall waybar || waybar" # toggle waybar
           # TODO : zen mode
           # TODO : logout
 
           # Applications shortcuts
-          "$mod, T, exec, kitty"
-          "$mod, O, exec, opera"
+          "$mod, T, exec, ${term}"
+          "$mod, O, exec, ${browser}"
 
           # Rofi
           # TODO : full rofi configuration

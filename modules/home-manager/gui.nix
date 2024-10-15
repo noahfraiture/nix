@@ -1,9 +1,8 @@
-{ pkgs, lib, config, ... }:
-
+{  pkgs, ... }:
 {
   home.packages = with pkgs; [
-    opera
     spotify
+    opera
     dolphin
     gparted
     onlyoffice-bin
