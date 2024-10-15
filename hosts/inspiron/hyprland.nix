@@ -21,7 +21,7 @@
     };
 
     environment.sessionVariables = {
-      WLR_MO_HARDWARE_CURSOR = "1";
+      # WLR_MO_HARDWARE_CURSOR = "1";
       NIXOS_OZONE_WL = "1";
     };
 
