@@ -5,7 +5,17 @@
     auto-optimise-store = true;
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+    # storageDriver = "btrfs";
+    daemon.settings = {
+      userland-proxy = false;
+    };
+  };
 
   services = {
     openssh.enable = true;

@@ -105,7 +105,6 @@
     bash-language-server     # formatter bash
     shfmt                    # formatter bash
     marksman                 # lsp markdown
-
     gopls                    # lsp go
     gotools                  # contains goimports formatter go
     golangci-lint            # linter go

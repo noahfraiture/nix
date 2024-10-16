@@ -6,12 +6,14 @@
   config = {
     hardware.graphics.enable = true;
 
+    # hardware.nvidia-container-toolkit.enable = true;
+
     hardware.nvidia = {
       modesetting.enable = true;
 
       powerManagement = {
         enable = true;
-        # finegrained = true; # add nvidia opti
+        # finegrained = true; # nvidia opti
       };
 
       # TODO : remove ?

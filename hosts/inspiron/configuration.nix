@@ -7,11 +7,12 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/nixos/default.nix
-
     ./system.nix # DONE:
     ./nvidia.nix # TODO : add double gpu
     ./hyprland.nix # TODO clean once choose what to keep
+
+    ../../modules/nixos/default.nix
+    ../../modules/nixos/stylix.nix
   ];
 
   time.timeZone = "Europe/Brussels";
@@ -49,7 +50,6 @@
         ../../modules/home-manager/languages.nix
         ../../modules/home-manager/shell.nix
         ../../modules/home-manager/starship.nix
-        ../../modules/home-manager/zellij.nix
       ];
     };
   };

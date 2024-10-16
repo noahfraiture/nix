@@ -1,12 +1,15 @@
 {  pkgs, ... }:
 {
   home.packages = with pkgs; [
-    spotify
-    opera
-    dolphin
+    bruno
     gparted
-    onlyoffice-bin
     obsidian
+    onlyoffice-bin
+    opera
+    qbittorrent
+    spotify
     vlc
+    vscode
+    zed-editor
   ];
 }
