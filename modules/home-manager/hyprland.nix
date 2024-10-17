@@ -98,9 +98,7 @@ in {
         "$mod, T, exec, ${term}"
         "$mod, O, exec, ${browser}"
 
-        # Rofi
-        # TODO : full rofi configuration
-        "$mod, A, exec, rofi -show drun -show-icons"
+        "$mod, A, exec, ags -t applauncher"
         # TODO : swww + wallbash or stylix to change theme
         # TODO : clipboard
 

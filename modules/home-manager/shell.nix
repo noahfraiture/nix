@@ -72,7 +72,6 @@ in {
     # pokemon-colorscripts-mac # Display pokemon
     powertop                 # Power tracker
     nix-prefetch-github      # Information about repo for nix
-    rofi-wayland             # Application launcher
     starship                 # Shell theme
     lshw                     # Display information about gpu
     zoxide                   # Smarter cd

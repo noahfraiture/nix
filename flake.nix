@@ -11,6 +11,7 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    ags.url = "github:Aylur/ags";
     stylix.url = "github:danth/stylix";
   };
 
