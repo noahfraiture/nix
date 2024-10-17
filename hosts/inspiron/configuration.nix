@@ -41,6 +41,7 @@
     users."noah" = {
       imports = [
         ./home.nix
+        ./variables.nix
         ../../modules/home-manager/development.nix
         ../../modules/home-manager/gui.nix
         ../../modules/home-manager/helix.nix
