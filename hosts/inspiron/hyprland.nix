@@ -33,7 +33,6 @@
 
     services = {
       dbus.enable = true; # screen sharing
-      displayManager.sddm.enable = true;
       xserver = {
         enable = true;
       };

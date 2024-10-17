@@ -9,6 +9,8 @@
     wget
     nushell
     hyprpanel
+    libsForQt5.qt5.qtgraphicaleffects #required for sugar candy
+
   ];
 
   fonts.packages = with pkgs; [
@@ -20,4 +22,11 @@
 
   users.users.noah.packages = with pkgs; [
   ];
+
+  services = {
+    displayManager.sddm = {
+      enable = true;
+      theme = "${import ./sddm-theme.nix {inherit pkgs; }}";
+    };
+  };
 }
