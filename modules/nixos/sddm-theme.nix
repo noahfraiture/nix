@@ -1,10 +1,8 @@
 { pkgs }:
 
 let
-  imgLink = "https://gruvbox-wallpapers.pages.dev/wallpapers/anime/5m5kLI9.png";
-
   image = pkgs.fetchurl {
-    url = imgLink;
+    url = "https://gruvbox-wallpapers.pages.dev/wallpapers/anime/5m5kLI9.png";
     sha256 = "sha256-utmDMNeSzboGyup3+0N8hjk8/wgiFctuWYD4u/JptxE=";
   };
 in

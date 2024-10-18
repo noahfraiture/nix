@@ -35,6 +35,11 @@
       dbus.enable = true; # screen sharing
       xserver = {
         enable = true;
+        # displayManager.sessionCommands = ''
+        #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
+        #     Xft.dpi: 110
+        #   EOF
+        # '';
       };
       devmon.enable = true; # TODO : script wrapper for udisk2, need test
       udisks2.enable = true; # NOTE : daemon lib for mount/umount

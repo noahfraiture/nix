@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs,  ... }:
 
 let
 zellijCfg = ''
@@ -61,30 +61,11 @@ plugins {
 '';
 in {
   home.packages = with pkgs; [
-    btop                     # Hardware tracker
-    carapace                 # shell completion
-    fastfetch                # Repo information
-    gdu                      # Disk tracker
-    lazydocker               # Docker manager
-    lazygit                  # Git manager
-    nvtopPackages.full       # GPU tracker
-    onefetch                 # Information about git repo
     # pokemon-colorscripts-mac # Display pokemon
-    powertop                 # Power tracker
-    nix-prefetch-github      # Information about repo for nix
     starship                 # Shell theme
     lshw                     # Display information about gpu
     zoxide                   # Smarter cd
 ];
-
-  programs.lazygit = {
-    enable = true;
-    settings = {
-      os.editPreset = "hx";
-      services."github.com" = "github:github.com";
-      notARepository = "skip";
-    };
-  };
 
   programs.zoxide = {
     enable = true;
@@ -109,7 +90,7 @@ in {
 
 
     shellAliases = {
-      update = "sudo nixos-rebuild switch --flake /etc/nixos/#inspiron";
+      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#inspiron";
       lg = "lazygit";
       ld = "lazydocker";
       cd = "__zoxide_z";
@@ -135,6 +116,7 @@ in {
     extraConfig = {
       init.defaultBranch = "main";
       github.user = "NoahFraiture";
+      pull.rebase = true;
     };
   };
 
@@ -151,5 +133,4 @@ in {
     # TODO : ssh config
   };
   services.ssh-agent.enable = true;
-
 }

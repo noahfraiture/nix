@@ -28,15 +28,14 @@ let
   term = "kitty";
   browser = "opera";
 
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
-  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-  pactl = "${pkgs.pulseaudio}/bin/pactl";
-
 in {
   wayland.windowManager.hyprland = {
     enable = true;
 
     settings = {
+      monitor = [
+        "Virtual-1, 3440x1440@100, 0x0, 1"
+      ];
       exec-once = [
         ''${startupScript}/bin/start''
         "hyprctl setcursor Qogir 24"

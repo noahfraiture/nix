@@ -32,6 +32,15 @@
   };
   services.getty.autologinUser = "noah";
 
+  # SSH
+  services.openssh.enable = true;
+
+  # GnuPG
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
   # Man page completion
   documentation.man.generateCaches = true;
 
@@ -43,15 +52,13 @@
         ./home.nix
         ./variables.nix
         ../../modules/home-manager/ags.nix
-        ../../modules/home-manager/development.nix
-        ../../modules/home-manager/gui.nix
         ../../modules/home-manager/helix.nix
         ../../modules/home-manager/hyprland.nix
         ../../modules/home-manager/hyprpanel.nix
         ../../modules/home-manager/kitty.nix
-        ../../modules/home-manager/languages.nix
         ../../modules/home-manager/shell.nix
         ../../modules/home-manager/starship.nix
+        ../../modules/home-manager/packages.nix
       ];
     };
   };

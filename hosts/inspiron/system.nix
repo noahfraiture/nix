@@ -17,12 +17,6 @@
     };
   };
 
-  services = {
-    openssh.enable = true;
-    flatpak.enable = true;
-  };
-
-
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   

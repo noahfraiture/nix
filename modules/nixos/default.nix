@@ -20,7 +20,7 @@
     nerdfonts
   ];
 
-  users.users.noah.packages = with pkgs; [
+  users.users.noah.packages =  [
   ];
 
   services = {

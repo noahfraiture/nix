@@ -13,6 +13,8 @@
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     ags.url = "github:Aylur/ags";
     stylix.url = "github:danth/stylix";
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -29,6 +31,7 @@
           ./hosts/inspiron/configuration.nix
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
+          inputs.nix-flatpak.nixosModules.nix-flatpak
         ];
       };
       # add here other machines
