@@ -62,7 +62,6 @@ plugins {
 in {
   home.packages = with pkgs; [
     # pokemon-colorscripts-mac # Display pokemon
-    starship                 # Shell theme
     lshw                     # Display information about gpu
     zoxide                   # Smarter cd
 ];

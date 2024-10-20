@@ -1,41 +1,7 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, config, ... }:
 
 
 let
-selfMade = {
-  right_format = ''$time'';
-  battery = true;
-  character = {
-    success_symbol = ''[\$](bold green)'';
-  };
-  directory = {
-    fish_style_pwd_dir_length = 3;
-    truncate_to_repo = true;
-  };
-  time = {
-    disabled = false;
-  };
-  cmd_duration = {
-    min_time = 1000;
-  };
-  git_status = {
-    format = "([\$ahead_behind\$staged\$modified\$untracked\$conflicted\$stashed\$deleted\$renamed\$typechanged](\$style))";
-    style = "bold green";
-    conflicted = "";
-    deleted = "\${count} ";
-    staged = "[+\($count\)](bold yellow) ";
-    ahead = "⇡\${count} ";
-    diverged = "⇣\${behind_count}⇡\${ahead_count} ";
-    behind = "⇣\${count} ";
-    modified = "[!\${count}](bold yellow) ";
-    untracked = "[?\${count}](bold cyan) ";
-  };
-
-  git_branch = {
-    symbol = "";
-  };
-};
-
 github = {
   # Chevron Glance
 
@@ -65,28 +31,28 @@ github = {
   palette = "chevron_glance";
 
   palettes.chevron_glance = {
-  	prim = "#a7906f"; #Primary/Directory Background
-  	sec = "#3a3a3a"; #Accents
-  	primt = "#3a3a3a"; #Primary text color (non-glyphic)
-  	sudo = "#9c454e";
-  	user = "#50925b";
-  	host = "#2596be";
-  	ip = "#2596be";
-  	duration = "#8a8a8a";
+  	prim = "#${config.lib.stylix.colors.base05}"; #Primary/Directory Background
+  	sec = "#${config.lib.stylix.colors.base01}"; #Accents
+  	primt = "#${config.lib.stylix.colors.base01}"; #Primary text color (non-glyphic)
+  	sudo = "#${config.lib.stylix.colors.base08}";
+  	user = "#${config.lib.stylix.colors.base0B}";
+  	host = "#${config.lib.stylix.colors.base0D}";
+  	ip = "#${config.lib.stylix.colors.base0D}";
+  	duration = "#${config.lib.stylix.colors.base06}";
 
   	# Git Colors
-  	tert = "#3a3a3a"; #Tertiary color, mostly used for GitHub text.
-  	conflicted = "red";
-  	ahead = "cyan";
-  	behind = "orange";
-  	diverged = "blue";
-  	uptodate = "green";
-  	untracked = "purple";
-  	stashed =  "#6b84eb"; #light blue
-  	modified = "yellow";
-  	staged = "#c5e187"; #sage
-  	renamed = "#ce63ff"; #lilac
-  	deleted = "#f54caf"; #pink
+  	tert = "#${config.lib.stylix.colors.base01}"; #Tertiary color, mostly used for GitHub text.
+  	conflicted = "#${config.lib.stylix.colors.base08}";
+  	ahead = "#${config.lib.stylix.colors.base0C}";
+  	behind = "#${config.lib.stylix.colors.base09}";
+  	diverged = "#${config.lib.stylix.colors.base0D}";
+  	uptodate = "#${config.lib.stylix.colors.base0B}";
+  	untracked = "#${config.lib.stylix.colors.base0E}";
+  	stashed =  "#${config.lib.stylix.colors.base07}"; #light blue
+  	modified = "#${config.lib.stylix.colors.base0A}";
+  	staged = "#${config.lib.stylix.colors.base0B}"; #sage
+  	renamed = "#${config.lib.stylix.colors.base0E}"; #lilac
+  	deleted = "#${config.lib.stylix.colors.base08}"; #pink
   };
 
   sudo = {
@@ -175,17 +141,17 @@ github = {
   git_status = {
   	format = "([$all_status$ahead_behind]($style))[](fg:sec bg:prim)";
   	style = "fg:prim bg:tert";
-  	conflicted = "[](fg:sec bg:conflicted)[](fg:conflicted bg:sec)";
-  	ahead = "[](fg:sec bg:ahead)[](fg:ahead bg:sec)";
-  	behind = "[](fg:sec bg:behind)[](fg:behind bg:behind)";
-  	diverged = "[](fg:sec bg:ahead)[](fg:ahead bg:sec)";
-  	up_to_date = "[](fg:sec bg:uptodate)[](fg:uptodate bg:sec)";
-  	untracked = "[](fg:sec bg:untracked)[](fg:untracked bg:sec)";
-  	stashed = "[](fg:sec bg:stashed)[](fg:stashed bg:sec)";
-  	modified = "[](fg:sec bg:modified)[](fg:modified bg:sec)";
-  	staged = "[](fg:sec bg:staged)[](fg:staged bg:sec)";
-  	renamed = "[](fg:sec bg:renamed)[](fg:renamed bg:sec)";
-  	deleted = "[](fg:sec bg:deleted)[](fg:deleted bg:sec)";
+  	conflicted = "[\${count}](fg:sec bold bg:conflicted)[](fg:conflicted bg:sec)";
+  	ahead = "[\${count}](fg:sec bold bg:ahead)[](fg:ahead bg:sec)";
+  	behind = "[\${count}](fg:sec bold bg:behind)[](fg:behind bg:behind)";
+  	diverged = "[\${count}](fg:sec bold bg:ahead)[](fg:ahead bg:sec)";
+  	up_to_date = "[\${count}](fg:sec bold bg:uptodate)[](fg:uptodate bg:sec)";
+  	untracked = "[\${count}](fg:sec bold bg:untracked)[](fg:untracked bg:sec)";
+  	stashed = "[\${count}](fg:sec bold bg:stashed)[](fg:stashed bg:sec)";
+  	modified = "[\${count}](fg:sec bold bg:modified)[](fg:modified bg:sec)";
+  	staged = "[\${count}](fg:sec bold bg:staged)[](fg:staged bg:sec)";
+  	renamed = "[\${count}](fg:sec bold bg:renamed)[](fg:renamed bg:sec)";
+  	deleted = "[\${count}](fg:sec bold bg:deleted)[](fg:deleted bg:sec)";
   	disabled = false;
   };
 
