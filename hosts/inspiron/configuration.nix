@@ -53,7 +53,9 @@
         ./variables.nix
         ../../modules/home-manager/ags.nix
         ../../modules/home-manager/helix.nix
+        ../../modules/home-manager/hypridle.nix
         ../../modules/home-manager/hyprland.nix
+        ../../modules/home-manager/hyprlock.nix
         ../../modules/home-manager/hyprpanel.nix
         ../../modules/home-manager/kitty.nix
         ../../modules/home-manager/shell.nix

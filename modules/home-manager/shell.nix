@@ -106,6 +106,9 @@ in {
   programs.atuin = {
     enable = true;
     enableNushellIntegration = true;
+    flags = [
+      "--disable-up-arrow"
+    ];
   };
 
   # Completion multi-shell

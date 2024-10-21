@@ -1,4 +1,5 @@
 # Hyprlock is a lockscreen for Hyprland
+# Config from nixy
 { config, ... }:
 let
   foreground = "rgba(216, 222, 233, 0.70)";
@@ -40,7 +41,7 @@ in {
         # Time
         {
           monitor = "";
-          text = ''cmd[update:1000] echo "<span>$(date +"%I:%M")</span>"'';
+          text = ''cmd[update:1000] echo "<span>$(date +"%H:%M")</span>"'';
           color = foreground;
           font_size = 160;
           font_family = "steelfish outline regular";
