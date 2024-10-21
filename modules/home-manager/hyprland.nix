@@ -33,9 +33,6 @@ in {
     enable = true;
 
     settings = {
-      monitor = [
-        "Virtual-1, 3440x1440@100, 0x0, 1"
-      ];
       exec-once = [
         ''${startupScript}/bin/start''
         "hyprctl setcursor Qogir 24"
