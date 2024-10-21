@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
 # TODO : add dual gpu handling
   hardware.graphics.enable = true;
 

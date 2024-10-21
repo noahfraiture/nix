@@ -67,17 +67,17 @@ in {
   "menus.dashboard.shortcuts.left.shortcut4.tooltip": "Search Apps",
 
   "menus.dashboard.directories.left.directory1.label": "󰉍 Downloads",
-  "menus.dashboard.directories.left.directory1.command": "kitty \"$env.HOME/Downloads/\"",
+  "menus.dashboard.directories.left.directory1.command": "kitty ${config.home.homeDirectory}/Downloads/",
   "menus.dashboard.directories.left.directory2.label": "󱧶 Documents",
-  "menus.dashboard.directories.left.directory2.command": "kitty \"$env.HOME/Documents/\"",
+  "menus.dashboard.directories.left.directory2.command": "kitty ${config.home.homeDirectory}/Documents/",
   "menus.dashboard.directories.left.directory3.label": "󰉏 Pictures",
-  "menus.dashboard.directories.left.directory3.command": "kitty \"$env.HOME/Pictures/\"",
+  "menus.dashboard.directories.left.directory3.command": "kitty ${config.home.homeDirectory}/Pictures/",
   "menus.dashboard.directories.right.directory1.label": "󱂵 Home",
-  "menus.dashboard.directories.right.directory1.command": "kitty \"$env.HOME/\"",
+  "menus.dashboard.directories.right.directory1.command": "kitty ${config.home.homeDirectory}/",
   "menus.dashboard.directories.right.directory2.label": "󰚝 Projects",
-  "menus.dashboard.directories.right.directory2.command": "kitty \"$env.HOME/Projects/\"",
+  "menus.dashboard.directories.right.directory2.command": "kitty ${config.home.homeDirectory}/Projects/",
   "menus.dashboard.directories.right.directory3.label": "󰉏 Videos",
-  "menus.dashboard.directories.right.directory3.command": "kitty \"$env.HOME/Videos/\"",
+  "menus.dashboard.directories.right.directory3.command": "kitty ${config.home.homeDirectory}/Videos/",
 
 
   "theme.font.name": "${font}",
