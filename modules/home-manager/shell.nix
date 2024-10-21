@@ -102,6 +102,12 @@ in {
   # Man page completion
   programs.man.generateCaches = true;
 
+  # Shell history
+  programs.atuin = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
   # Completion multi-shell
   programs.carapace = {
     enable = true;
