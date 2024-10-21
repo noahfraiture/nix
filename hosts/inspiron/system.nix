@@ -28,9 +28,13 @@
 
   services = {
     thermald.enable = true;
-    tlp.enable = true;
-    START_CHARGE_TRESH_BAT0 = 40;
-    STOP_CHARGE_TRESH_BAT0 = 80;
+    tlp = {
+      enable = true;
+      settings = {
+        START_CHARGE_TRESH_BAT0 = 40;
+        STOP_CHARGE_TRESH_BAT0 = 80;
+      };
+    };
   };
 
   boot = {

@@ -105,6 +105,7 @@ in {
   # Shell history
   programs.atuin = {
     enable = true;
+    enableNushellIntegration = true;
   };
 
   # Completion multi-shell
