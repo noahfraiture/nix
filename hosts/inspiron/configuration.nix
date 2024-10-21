@@ -12,6 +12,7 @@
     ./hyprland.nix # TODO clean once choose what to keep
 
     ../../modules/nixos/default.nix
+    ../../modules/nixos/spicetify.nix
     ../../modules/nixos/stylix.nix
   ];
 
