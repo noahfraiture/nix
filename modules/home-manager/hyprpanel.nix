@@ -3,7 +3,7 @@ let
 
   # Bonus not handled by stylix only for gruvbox
   # Other theme would require other value so it might not be convenient
-  # WARN : every color is slightly different :) because it's actually 24bits colors
+  # WARN : every color is slightly different :) as stylix only use base16 colors
 
   base =       "#${config.lib.stylix.colors.base00}";
   mantle =     "#${config.lib.stylix.colors.base01}";
@@ -34,6 +34,9 @@ in {
     text = # json
       ''
 {
+  {
+    "bar.layouts": {},
+  },
   "theme.font.name": "${font}",
   "theme.font.size": "${fontSize}px",
   "bar.launcher.icon": "",
