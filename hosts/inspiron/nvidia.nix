@@ -1,26 +1,33 @@
-{
-  config,
-  ...
-}: {
-  # TODO : add dual gpu handling
-  config = {
-    hardware.graphics.enable = true;
+{ ... }: {
+# TODO : add dual gpu handling
+  hardware.graphics.enable = true;
 
-    # hardware.nvidia-container-toolkit.enable = true;
+  # hardware.nvidia-container-toolkit.enable = true;
 
-    hardware.nvidia = {
-      modesetting.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
 
-      powerManagement = {
+    powerManagement = {
+      enable = true;
+      finegrained = true; # nvidia opti
+    };
+
+    # TODO : remove ?
+    open = true;
+
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
+
+    # Disable gpu when not needed.
+    # NOTE: could change this with a clamshell mode and multiple boot
+    # configuration.
+    prime = {
+      offload = {
         enable = true;
-        # finegrained = true; # nvidia opti
+        enableOffloadCmd = true;
       };
-
-      # TODO : remove ?
-      open = true;
-
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      nvidiaBusId = "PCI:1:0:0"; 
+      intelBusId = "PCI:0:2:0"; 
     };
   };
 }
