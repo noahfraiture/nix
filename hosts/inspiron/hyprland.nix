@@ -32,7 +32,6 @@
     };
 
     services = {
-      dbus.enable = true; # screen sharing
       xserver = {
         enable = true;
         # displayManager.sessionCommands = ''
@@ -41,10 +40,6 @@
         #   EOF
         # '';
       };
-      devmon.enable = true; # TODO : script wrapper for udisk2, need test
-      udisks2.enable = true; # NOTE : daemon lib for mount/umount
-      upower.enable = true; # NOTE : lib for power info
-      power-profiles-daemon.enable = true; # TODO : choose the power manager
     };
   };
 }
