@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -24,8 +24,9 @@
     # Language
     python3
     cargo
-    deno # TODO : update 2.0
-    go # TODO : update to 1.23 ?
+    go
+    deno
+    texliveFull
 
     # Shell
     btop                     # Hardware tracker

@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, ... }:
 
 {
   stylix.targets.helix.enable = false;
@@ -174,6 +174,12 @@
 
     languages = {
 
+      language-server.deno-lsp = {
+        command = "deno";
+        args = ["lsp"];
+        config.deno.enable = true;
+      };
+
       language = [
         {
           name = "rust";
@@ -205,6 +211,38 @@
           auto-format = true;
           formatter.command = "marksman";
         }
+        {
+          name = "javascript";
+          shebangs = ["deno"];
+          roots = ["deno.json""deno.jsonc""package.json"];
+          file-types = ["js"];
+          language-servers = ["deno-lsp"];
+          auto-format = true;
+        }
+        {
+          name = "typescript";
+          shebangs = ["deno"];
+          roots = ["deno.json" "deno.jsonc" "package.json"];
+          file-types = ["ts"];
+          language-servers = ["deno-lsp"];
+          auto-format = true;
+        }
+        {
+          name = "jsx";
+          shebangs = ["deno"];
+          roots = ["deno.json" "deno.jsonc" "package.json"];
+          file-types = ["jsx"];
+          language-servers = ["deno-lsp"];
+          auto-format = true;
+        }
+        {
+          name = "tsx";
+          shebangs = ["deno"];
+          roots = ["deno.json" "deno.jsonc" "package.json"];
+          file-types = ["tsx"];
+          language-servers = ["deno-lsp"];
+          auto-format = true;
+        }
       ];
     };
   };
@@ -224,5 +262,6 @@
     gotools                  # contains goimports formatter go
     golangci-lint            # linter go
     golangci-lint-langserver # lsp needed for the go linter
+    texlab
   ];
 }
