@@ -51,7 +51,6 @@
     users."noah" = {
       imports = [
         ./home.nix
-        ./variables.nix
         ../../modules/home-manager/ags.nix
         ../../modules/home-manager/helix.nix
         ../../modules/home-manager/hypridle.nix
