@@ -48,14 +48,23 @@ in {
     "show_numbered": false,
     "monitorSpecific": true,
     "hideUnoccupied": true,
-    "workspaces": 5
+    "workspaces": 5,
+    "show_icons": true
   },
-  "bar.windowtitle.label": true,
-  "bar.volume.label": true,
-  "bar.network.truncation_size": 12,
-  "bar.bluetooth.label": true,
-  "bar.clock.format": "%a %b %e  %H:%M",
-  "bar.notifications.show_total": true,
+  "bar.workspaces": {
+    "windowtitle.label": true,
+    "volume.label": true,
+    "network.truncation_size": 12,
+    "bluetooth.label": true,
+    "clock.format": "%a %b %e  %H:%M",
+    "notifications.show_total": true
+  },
+
+  "bar.customModules.storage.leftClick": "gdu",
+  "bar.customModules.cpu.leftClick": "btop",
+  "bar.customModules.ram.leftClick": "btop",
+  "bar.customModules.netstat.leftClick": "btop",
+  "bar.customModules.updates.leftClick": "rebuild",
 
   "menus.dashboard.stats.enable_gpu": true,
 
@@ -86,6 +95,7 @@ in {
   "wallpaper.enable": false,
   
   "theme": {
+    "bar.buttons.dashboard.enableBorder": true,
     "bar.menus.menu.notifications.scrollbar.color"                 : "${blue}",
     "bar.menus.menu.notifications.pager.label"                     : "${surface2}",
     "bar.menus.menu.notifications.pager.button"                    : "${blue}",
