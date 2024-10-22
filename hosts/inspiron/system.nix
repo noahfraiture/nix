@@ -2,7 +2,13 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
     experimental-features = "nix-command flakes";
-    auto-optimise-store = true;
+    auto-optimise-store = true; # optimise at every build
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   virtualisation.docker = {
