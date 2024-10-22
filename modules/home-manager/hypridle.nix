@@ -20,7 +20,7 @@
 
         {
           timeout = 660;
-          on-timeout = "systemctl suspend";
+          # on-timeout = "systemctl suspend"; // FIX: suspend make crash. May be because of VM
         }
       ];
     };
