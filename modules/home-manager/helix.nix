@@ -180,17 +180,22 @@
         config.deno.enable = true;
       };
 
+      language-server.wakatime = {
+        command = "wakatime-lsp";
+      };
+
       language = [
         {
           name = "rust";
           auto-format = true;
           formatter.command = "rustfmt";
+          language-servers = ["rust-analyzer" "wakatime"];
           # TODO : config check clippy
         }
         {
           name = "python";
           auto-format = true;
-          language-servers = ["pyright"];
+          language-servers = ["pyright" "wakatime"];
           formatter = {
             command = "black";
             args = ["--line-length" "100" "--quiet" "-"];
@@ -205,6 +210,12 @@
           name = "go";
           auto-format = true;
           formatter.command = "goimports";
+          language-servers = ["golangci-lint-lsp" "gopls" "wakatime"];
+        }
+        {
+          name = "svelte";
+          auto-format = true;
+          language-servers = ["svelteserve" "wakatime"];
         }
         {
           name = "markdown";
@@ -216,7 +227,7 @@
           shebangs = ["deno"];
           roots = ["deno.json""deno.jsonc""package.json"];
           file-types = ["js"];
-          language-servers = ["deno-lsp"];
+          language-servers = ["deno-lsp" "wakatime"];
           auto-format = true;
         }
         {
@@ -224,7 +235,7 @@
           shebangs = ["deno"];
           roots = ["deno.json" "deno.jsonc" "package.json"];
           file-types = ["ts"];
-          language-servers = ["deno-lsp"];
+          language-servers = ["deno-lsp" "wakatime"];
           auto-format = true;
         }
         {
@@ -232,7 +243,7 @@
           shebangs = ["deno"];
           roots = ["deno.json" "deno.jsonc" "package.json"];
           file-types = ["jsx"];
-          language-servers = ["deno-lsp"];
+          language-servers = ["deno-lsp" "wakatime"];
           auto-format = true;
         }
         {
@@ -240,7 +251,7 @@
           shebangs = ["deno"];
           roots = ["deno.json" "deno.jsonc" "package.json"];
           file-types = ["tsx"];
-          language-servers = ["deno-lsp"];
+          language-servers = ["deno-lsp" "wakatime"];
           auto-format = true;
         }
       ];
@@ -263,5 +274,19 @@
     golangci-lint            # linter go
     golangci-lint-langserver # lsp needed for the go linter
     texlab
+    svelte-language-server
+
+    # Add wakatime-lsp installation
+    (rustPlatform.buildRustPackage {
+      pname = "wakatime-lsp";
+      version = "v0.1.1";
+      src = fetchFromGitHub {
+        owner = "mrnossiom";
+        repo = "wakatime-lsp";
+        rev = "552fbbcc5fc0f8cf3122daad63bb4eb1497bbc76";
+        hash = "sha256-bvkig0TLiorNp7Lxer8ZRJQGB3C8lVJ96H2+SwYIT6s=";
+      };
+      cargoHash = "sha256-s1qmtykd2Jigx/+DtZLsPpl7lRm+d5EUI7cv5HyHr2c=";
+    })
   ];
 }
