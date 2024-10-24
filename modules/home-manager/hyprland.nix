@@ -1,8 +1,7 @@
 { pkgs, ... }:
 
 let
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-  '';
+  startupScript = pkgs.pkgs.writeShellScriptBin "start" '''';
 
   pinScript = pkgs.pkgs.writeShellScriptBin "pin" ''
     # enable float
@@ -28,7 +27,8 @@ let
   term = "kitty";
   browser = "opera";
 
-in {
+in
+{
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -37,7 +37,7 @@ in {
         ''${startupScript}/bin/start''
         "hyprctl setcursor Qogir 24"
       ];
-    
+
       input = {
         kb_options = "caps:swapescape";
         kb_layout = "us";
@@ -68,7 +68,7 @@ in {
       };
 
       xwayland.force_zero_scaling = true;
-     
+
       # TODO : replace kitty by env variable
       "$mod" = "ALT";
 
@@ -80,11 +80,11 @@ in {
       bind = [
         # Window/Session actions
         "$mod, Q, killactive"
-        "$mod, Delete, exit,"                         # kill hyprland session
-        "$mod, W, togglefloating,"                    # toggle the window between focus and float
-        "$mod, G, togglegroup,"                       # toggle the window between focus and group
-        "$mod, F, fullscreen,"                        # toggle the window between focus and fullscreen
-        ''$mod, P, exec, ${pinScript}/bin/pin''        # toggle pin on focused window
+        "$mod, Delete, exit," # kill hyprland session
+        "$mod, W, togglefloating," # toggle the window between focus and float
+        "$mod, G, togglegroup," # toggle the window between focus and group
+        "$mod, F, fullscreen," # toggle the window between focus and fullscreen
+        ''$mod, P, exec, ${pinScript}/bin/pin'' # toggle pin on focused window
         "$mod, B, exec, hyprctl setprop active opaque toggle" # toggle opaque on window
         "$mod, ESCAPE, exec, hyprpanel -t powermenu"
         # TODO : zen mode
@@ -98,7 +98,6 @@ in {
         # TODO : clipboard
 
         # F# controls (mostly not bind)
-
 
         # === WINDOWS MANAGEMENTS - Super (Shift to drag) ===
 

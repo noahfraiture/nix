@@ -22,25 +22,30 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-  {
-    nixosConfigurations = {
-      inspiron = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system = "x86_64-linux";
-        modules = [
-          {
-            nixpkgs.overlays = [ inputs.hyprpanel.overlay ];
-            _module.args = { inherit inputs; };
-          }
-          ./hosts/inspiron/configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-          inputs.stylix.nixosModules.stylix
-          inputs.nix-flatpak.nixosModules.nix-flatpak
-          inputs.spicetify-nix.nixosModules.default # TODO : move that in home-manager
-        ];
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    {
+      nixosConfigurations = {
+        inspiron = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          system = "x86_64-linux";
+          modules = [
+            {
+              nixpkgs.overlays = [ inputs.hyprpanel.overlay ];
+              _module.args = {
+                inherit inputs;
+              };
+            }
+            ./hosts/inspiron/configuration.nix
+            inputs.home-manager.nixosModules.home-manager
+            inputs.stylix.nixosModules.stylix
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+            inputs.spicetify-nix.nixosModules.default # TODO : move that in home-manager
+          ];
+        };
+        # add here other machines
       };
-      # add here other machines
     };
-  };
 }

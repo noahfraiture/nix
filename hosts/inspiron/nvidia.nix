@@ -1,5 +1,6 @@
-{ config, ... }: {
-# TODO : add dual gpu handling
+{ config, ... }:
+{
+  # TODO : add dual gpu handling
   hardware.graphics.enable = true;
 
   # hardware.nvidia-container-toolkit.enable = true;
@@ -26,8 +27,8 @@
         enable = true;
         enableOffloadCmd = true;
       };
-      nvidiaBusId = "PCI:1:0:0"; 
-      intelBusId = "PCI:0:2:0"; 
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0";
     };
   };
 }

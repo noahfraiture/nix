@@ -1,70 +1,71 @@
-{ pkgs,  ... }:
+{ pkgs, ... }:
 
 let
-zellijCfg = ''
-keybinds {
-  shared {
-    unbind "Ctrl s"
-    bind "Alt s" { SwitchToMode "search"; }
+  zellijCfg = ''
+    keybinds {
+      shared {
+        unbind "Ctrl s"
+        bind "Alt s" { SwitchToMode "search"; }
 
-    unbind "Ctrl h"
-    bind "Alt m" { SwitchToMode "move"; }
+        unbind "Ctrl h"
+        bind "Alt m" { SwitchToMode "move"; }
 
-    unbind "Ctrl o"
-    bind "Alt o" { SwitchToMode "session"; }
+        unbind "Ctrl o"
+        bind "Alt o" { SwitchToMode "session"; }
 
-    unbind "Ctrl p"
-    bind "Alt p" { SwitchToMode "pane"; }
+        unbind "Ctrl p"
+        bind "Alt p" { SwitchToMode "pane"; }
 
-    unbind "Ctrl g"
-    bind "Alt g" { SwitchToMode "Locked"; }
+        unbind "Ctrl g"
+        bind "Alt g" { SwitchToMode "Locked"; }
 
-    unbind "Ctrl t"
-    bind "Alt t" { SwitchToMode "tab"; }
+        unbind "Ctrl t"
+        bind "Alt t" { SwitchToMode "tab"; }
 
-    unbind "Ctrl n"
-    bind "Alt n" { NewPane; }
-    bind "Alt r" { SwitchToMode "resize"; }
+        unbind "Ctrl n"
+        bind "Alt n" { NewPane; }
+        bind "Alt r" { SwitchToMode "resize"; }
 
-    unbind "Ctrl q"
-    bind "Alt w" { Detach; }
+        unbind "Ctrl q"
+        bind "Alt w" { Detach; }
 
-    bind "Alt f" { ToggleFocusFullscreen; }
-    bind "Alt c" { Clear; }
-  }
-  pane {
-    bind "h" { NewPane "Left"; }
-    bind "j" { NewPane "Down"; }
-    bind "k" { NewPane "Up"; }
-    bind "l" { NewPane "Right"; }
-  }
-  shared_except "locked" {
-    bind "Alt q" { Quit; }
-  }
-  locked {
-    bind "Alt g" { SwitchToMode "Normal"; }
-  }
-  search {
-    bind "s" { SwitchToMode "EnterSearch"; SearchInput 0;}
-  }
-}
+        bind "Alt f" { ToggleFocusFullscreen; }
+        bind "Alt c" { Clear; }
+      }
+      pane {
+        bind "h" { NewPane "Left"; }
+        bind "j" { NewPane "Down"; }
+        bind "k" { NewPane "Up"; }
+        bind "l" { NewPane "Right"; }
+      }
+      shared_except "locked" {
+        bind "Alt q" { Quit; }
+      }
+      locked {
+        bind "Alt g" { SwitchToMode "Normal"; }
+      }
+      search {
+        bind "s" { SwitchToMode "EnterSearch"; SearchInput 0;}
+      }
+    }
 
-plugins {
-  tab-bar location="zellij:tab-bar"
-  status-bar location="zellij:status-bar"
-  strider location="zellij:strider"
-  compact-bar location="zellij:compact-bar"
-  session-manager location="zellij:session-manager"
-  welcome-screen location="zellij:session-manager" { welcome_screen true }
-  filepicker location="zellij:strider" { cwd "/" }
-}
-'';
-in {
+    plugins {
+      tab-bar location="zellij:tab-bar"
+      status-bar location="zellij:status-bar"
+      strider location="zellij:strider"
+      compact-bar location="zellij:compact-bar"
+      session-manager location="zellij:session-manager"
+      welcome-screen location="zellij:session-manager" { welcome_screen true }
+      filepicker location="zellij:strider" { cwd "/" }
+    }
+  '';
+in
+{
   home.packages = with pkgs; [
     # pokemon-colorscripts-mac # Display pokemon
-    lshw                     # Display information about gpu
-    zoxide                   # Smarter cd
-];
+    lshw # Display information about gpu
+    zoxide # Smarter cd
+  ];
 
   programs.zoxide = {
     enable = true;
@@ -79,14 +80,13 @@ in {
   programs.nushell = {
     enable = true;
     configFile.text = ''
-    $env.config = {
-      show_banner: false
-      edit_mode: vi
-    }
-    $env.EDITOR = "hx"
-    $env.VISUAL = "hx"
+      $env.config = {
+        show_banner: false
+        edit_mode: vi
+      }
+      $env.EDITOR = "hx"
+      $env.VISUAL = "hx"
     '';
-
 
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#inspiron";

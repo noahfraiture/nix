@@ -5,7 +5,8 @@ let
   foreground = "rgba(216, 222, 233, 0.70)";
   imageStr = toString config.stylix.image;
   font = config.stylix.fonts.serif.name;
-in {
+in
+{
   programs.hyprlock = {
     enable = true;
     settings = {
@@ -67,24 +68,26 @@ in {
       ];
 
       # INPUT FIELD
-      input-field = [{
-        monitor = "";
-        size = "300, 60";
-        outline_thickness = 2;
-        dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
-        dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
-        dots_center = true;
-        outer_color = "rgba(255, 255, 255, 0)";
-        inner_color = "rgba(255, 255, 255, 0.1)";
-        font_color = foreground;
-        fade_on_empty = false;
-        font_family = font + " Bold";
-        placeholder_text = "<i>🔒 Enter Password</i>";
-        hide_input = false;
-        position = "0, -250";
-        halign = "center";
-        valign = "center";
-      }];
+      input-field = [
+        {
+          monitor = "";
+          size = "300, 60";
+          outline_thickness = 2;
+          dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
+          dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
+          dots_center = true;
+          outer_color = "rgba(255, 255, 255, 0)";
+          inner_color = "rgba(255, 255, 255, 0.1)";
+          font_color = foreground;
+          fade_on_empty = false;
+          font_family = font + " Bold";
+          placeholder_text = "<i>🔒 Enter Password</i>";
+          hide_input = false;
+          position = "0, -250";
+          halign = "center";
+          valign = "center";
+        }
+      ];
     };
   };
 }

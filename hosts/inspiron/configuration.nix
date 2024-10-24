@@ -5,7 +5,8 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./system.nix # DONE:
     ./nvidia.nix # TODO : add double gpu
@@ -23,13 +24,16 @@
     variant = "";
   };
 
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.noah = {
     isNormalUser = true;
     description = "noah";
     shell = pkgs.nushell;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
   };
   services.getty.autologinUser = "noah";
 
@@ -47,7 +51,9 @@
 
   home-manager = {
     backupFileExtension = "bak";
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {
+      inherit inputs;
+    };
     users."noah" = {
       imports = [
         ./home.nix

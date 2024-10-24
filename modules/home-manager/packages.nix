@@ -29,15 +29,15 @@
     texliveFull
 
     # Shell
-    btop                     # Hardware tracker
-    carapace                 # shell completion
-    fastfetch                # Repo information
-    gdu                      # Disk tracker
-    lazydocker               # Docker manager
-    lazygit                  # Git manager
-    nvtopPackages.full       # GPU tracker
-    onefetch                 # Information about git repo
-    powertop                 # Power tracker
+    btop # Hardware tracker
+    carapace # shell completion
+    fastfetch # Repo information
+    gdu # Disk tracker
+    lazydocker # Docker manager
+    lazygit # Git manager
+    nvtopPackages.full # GPU tracker
+    onefetch # Information about git repo
+    powertop # Power tracker
   ];
 
   programs.lazygit = {
