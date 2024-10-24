@@ -524,8 +524,8 @@
   home.packages = with pkgs; [
     helix
     clang-tools # lsp C
-    nil # lsp nix, NOTE: no formatter since it's ugly
-    nixfmt-rfc-style
+    nil # lsp nix. NOTE : could replace by nixd one day
+    nixfmt-rfc-style # formatter nix
     rust-analyzer # lsp rust
     rustfmt # formatter rust
     pyright # lsp python
