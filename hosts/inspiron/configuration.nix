@@ -69,6 +69,7 @@
         ../../modules/home-manager/shell.nix
         ../../modules/home-manager/starship.nix
         ../../modules/home-manager/stylix.nix
+        ../../modules/home-manager/zellij.nix
 
       ];
     };
