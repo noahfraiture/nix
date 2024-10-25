@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   stylix.targets.helix.enable = false;
@@ -9,7 +9,7 @@
 
     settings = {
 
-      theme = "catppuccin-mocha";
+      theme = "stylix";
 
       editor = {
         line-number = "relative";
@@ -50,6 +50,8 @@
           "'" = [ "expand_selection" ];
           "C-'" = [ "shrink_selection" ];
 
+          "C-;" = [ "flip_selections" ];
+
           "backspace" = [
             "move_char_left"
             "delete_selection_noyank"
@@ -74,24 +76,26 @@
     };
 
     themes = {
-      catppuccin-mocha =
+      stylix =
         let
-          yellow = "#E5C07B";
-          blue = "#61AFEF";
-          red = "#E06C75";
-          purple = "#C678DD";
-          green = "#98C379";
-          gold = "#D19A66";
-          cyan = "#56B6C2";
-          white = "#ABB2BF";
-          bg = "#1E1E2F";
-          light-bg = "#32324e";
-          gray = "#3E4452";
-          faint-gray = "#3B4048";
-          light-gray = "#5C6370";
-          linenr = "#4B5263";
+          yellow = "#${config.lib.stylix.colors.base0A}";
+          blue = "#${config.lib.stylix.colors.base0D}";
+          red = "#${config.lib.stylix.colors.base08}";
+          purple = "#${config.lib.stylix.colors.base0E}";
+          green = "#${config.lib.stylix.colors.base0B}";
+          gold = "#${config.lib.stylix.colors.base09}";
+          cyan = "#${config.lib.stylix.colors.base0C}";
+          flamingo = "#${config.lib.stylix.colors.base0F}";
+          white = "#${config.lib.stylix.colors.base05}";
+          bg = "#${config.lib.stylix.colors.base00}";
+          light-bg = "#${config.lib.stylix.colors.base02}";
+          gray = "#${config.lib.stylix.colors.base04}";
+          faint-gray = "#${config.lib.stylix.colors.base04}";
+          light-gray = "#${config.lib.stylix.colors.base02}";
+          linenr = "#${config.lib.stylix.colors.base03}";
         in
         {
+
           "tag" = {
             fg = red;
           };
@@ -205,19 +209,19 @@
           "diff.delta" = gold;
           "diff.minus" = red;
 
-          "diagnostic.info.underline" = {
+          "diagnostic.info".underline = {
             color = blue;
             style = "curl";
           };
-          "diagnostic.hint.underline" = {
+          "diagnostic.hint".underline = {
             color = green;
             style = "curl";
           };
-          "diagnostic.warning.underline" = {
+          "diagnostic.warning".underline = {
             color = yellow;
             style = "curl";
           };
-          "diagnostic.error.underline" = {
+          "diagnostic.error".underline = {
             color = red;
             style = "curl";
           };
@@ -268,7 +272,7 @@
           };
 
           "ui.cursor" = {
-            fg = "#C3A2A2";
+            fg = flamingo;
             modifiers = [ "reversed" ];
           };
           "ui.cursor.primary" = {
@@ -281,7 +285,7 @@
           };
 
           "ui.selection" = {
-            bg = "#4f1717";
+            bg = linenr;
           };
           "ui.selection.primary" = {
             bg = gray;
@@ -294,7 +298,7 @@
             bg = gray;
           };
           "ui.highlight.frameline" = {
-            bg = "#97202a";
+            bg = red;
           };
 
           "ui.linenr" = {
@@ -312,6 +316,7 @@
             fg = light-gray;
             bg = light-bg;
           };
+          # require editor.color-modes;
           "ui.statusline.normal" = {
             fg = light-bg;
             bg = blue;
@@ -327,6 +332,7 @@
             bg = purple;
             modifiers = [ "bold" ];
           };
+
           "ui.bufferline" = {
             fg = light-gray;
             bg = light-bg;
@@ -378,7 +384,9 @@
           "ui.debug" = {
             fg = red;
           };
+
         };
+
     };
 
     languages = {
