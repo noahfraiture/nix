@@ -50,7 +50,7 @@
   documentation.man.generateCaches = true;
 
   home-manager = {
-    backupFileExtension = "bak";
+    backupFileExtension = "bakbak";
     extraSpecialArgs = {
       inherit inputs;
     };

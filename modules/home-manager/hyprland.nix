@@ -69,6 +69,44 @@ in
 
       xwayland.force_zero_scaling = true;
 
+      general = {
+        border_size = 2;
+        gaps_in = 3;
+        gaps_out = 8;
+        resize_on_border = true;
+      };
+
+      decoration = {
+        rounding = 10;
+        active_opacity = 0.9;
+        inactive_opacity = 0.9;
+
+        blur = {
+          enabled = true;
+          size = 6;
+          passes = 5;
+          xray = false;
+        };
+      };
+
+      animations = {
+        bezier = [
+          "wind, 0.05, 0.9, 0.1, 1.05"
+          "winIn, 0.1, 1.1, 0.1, 1.1"
+          "winOut, 0.3, -0.3, 0, 1"
+          "liner, 1, 1, 1, 1"
+        ];
+        animation = [
+          "windows, 1, 4, wind, popin"
+          "windowsIn, 1, 4, winIn, popin"
+          "windowsOut, 1, 4, winOut, popin"
+          "windowsMove, 1, 4, wind, popin"
+          "border, 1, 1, liner"
+          "fade, 1, 8, default"
+          "workspaces, 1, 4, wind"
+        ];
+      };
+
       # TODO : replace kitty by env variable
       "$mod" = "ALT";
 
