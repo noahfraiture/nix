@@ -10,6 +10,8 @@
     # https://github.com/tinted-theming/schemes
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
+    polarity = "dark";
+
     fonts = {
       monospace = {
         package = pkgs.nerdfonts;
@@ -19,5 +21,13 @@
         desktop = 16;
       };
     };
+
+    # https://github.com/ful1e5/Bibata_Cursor
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 24;
+    };
+
   };
 }

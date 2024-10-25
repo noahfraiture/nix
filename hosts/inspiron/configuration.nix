@@ -8,9 +8,9 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./system.nix # DONE:
-    ./nvidia.nix # TODO : add double gpu
-    ./hyprland.nix # TODO clean once choose what to keep
+    ./system.nix
+    ./nvidia.nix
+    ./hyprland.nix
 
     ../../modules/nixos/default.nix
     ../../modules/nixos/spicetify.nix

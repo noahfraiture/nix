@@ -103,7 +103,7 @@
             fg = yellow;
           };
           "comment" = {
-            fg = light-gray;
+            fg = gray;
             modifiers = [ "italic" ];
           };
           "constant" = {
