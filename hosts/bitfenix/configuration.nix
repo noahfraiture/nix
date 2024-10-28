@@ -6,20 +6,14 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
+    # Include the results of the hardware scan
     ./hardware-configuration.nix
     ./system.nix
-    ./nvidia.nix
-    ./hyprland.nix
+    # ./nvidia.nix
 
     ../../modules/nixos/default.nix
-    ../../modules/nixos/spicetify.nix
     ../../modules/nixos/stylix.nix
   ];
-
-  sddm.enable = true;
-  fonts.enable = true;
-  graphical.enable = true;
 
   time.timeZone = "Europe/Brussels";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -38,6 +32,10 @@
       "wheel"
       "docker"
     ];
+    openssh.authorizedKeys.keys = [
+      # inspirion
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDksZIDlMfNKEJdCc2l5gPb+r60jzmpn+//jHjK63H1x pro@noahcode.dev"
+    ];
   };
   services.getty.autologinUser = "noah";
 
@@ -47,14 +45,14 @@
   # GnuPG
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
+    enableSSHSupport = false;
   };
 
   # Man page completion
   documentation.man.generateCaches = true;
 
   home-manager = {
-    backupFileExtension = "bakbak";
+    backupFileExtension = "bak";
     extraSpecialArgs = {
       inherit inputs;
     };
@@ -62,13 +60,7 @@
       imports = [
         ./home.nix
 
-        ../../modules/home-manager/ags.nix
         ../../modules/home-manager/helix.nix
-        ../../modules/home-manager/hypridle.nix
-        ../../modules/home-manager/hyprland.nix
-        ../../modules/home-manager/hyprlock.nix
-        ../../modules/home-manager/hyprpanel.nix
-        ../../modules/home-manager/kitty.nix
         ../../modules/home-manager/packages.nix
         ../../modules/home-manager/shell.nix
         ../../modules/home-manager/starship.nix
@@ -77,13 +69,10 @@
 
       ];
 
-      gui.enable = true;
       shell.enable = true;
       language.enable = true;
-      exegol.enable = true;
       wakatime.enable = true;
       lazygit.enable = true;
-
     };
   };
 }

@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   home.packages = with pkgs; [
     # pokemon-colorscripts-mac # Display pokemon
@@ -24,7 +29,7 @@
 
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#inspiron";
-      lg = "lazygit";
+      lg = lib.mkIf config.lazygit.enable "lazygit";
       ld = "lazydocker";
       cd = "__zoxide_z";
       cdi = "__zoxide_zi";

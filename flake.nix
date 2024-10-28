@@ -45,6 +45,17 @@
             inputs.spicetify-nix.nixosModules.default # TODO : move that in home-manager
           ];
         };
+        bitfenix = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./hosts/bitfenix/configuration.nix
+            inputs.home-manager.nixosModules.home-manager
+            inputs.stylix.nixosModules.stylix
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+          ];
+        };
         # add here other machines
       };
     };
