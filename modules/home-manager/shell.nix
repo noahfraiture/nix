@@ -25,10 +25,11 @@
       }
       $env.EDITOR = "hx"
       $env.VISUAL = "hx"
+
+      def rebuild [name] = {sudo nixos-rebuild switch --flake $"/etc/nixos/#($name)"}
     '';
 
     shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/#inspiron";
       lg = lib.mkIf config.lazygit.enable "lazygit";
       ld = "lazydocker";
       cd = "__zoxide_z";

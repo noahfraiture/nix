@@ -2,7 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -12,6 +16,7 @@
     # ./nvidia.nix
 
     ../../modules/nixos/default.nix
+    ../../modules/nixos/tailscale.nix
     ../../modules/nixos/stylix.nix
   ];
 
@@ -39,8 +44,13 @@
   };
   services.getty.autologinUser = "noah";
 
-  # SSH
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "prohibit-password";
+    };
+  };
 
   # GnuPG
   programs.gnupg.agent = {

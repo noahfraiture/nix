@@ -18,13 +18,12 @@
       enable = true;
       setSocketVariable = true;
     };
-    # storageDriver = "btrfs";
     daemon.settings = {
       userland-proxy = false;
     };
   };
 
-  networking.hostName = "nixos";
+  networking.hostName = "bitfenix";
   networking.networkmanager.enable = true;
 
   services = {
