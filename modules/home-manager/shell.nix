@@ -30,7 +30,7 @@
 
       def awake [name] = {
         match $name {
-          "bitfenix" => wol d8:bb:c1:52:6c:f0
+          "bitfenix" => { wol d8:bb:c1:52:6c:f0 }
           _ => "MAC not known"
         }
       }

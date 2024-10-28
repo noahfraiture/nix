@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
@@ -25,6 +25,13 @@
 
   networking.hostName = "bitfenix";
   networking.networkmanager.enable = true;
+  networking.interfaces.enp4s0.wakeOnLan = {
+    enable = true;
+  };
+  environment.systemPackages = with pkgs; [
+    ethtool
+    wol
+  ];
 
   services = {
     thermald.enable = true;
