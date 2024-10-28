@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
 
   # Bonus not handled by stylix only for gruvbox
@@ -28,6 +28,22 @@ let
   fontSize = "${toString config.stylix.fonts.sizes.desktop}";
 in
 {
+
+  home.activation = {
+    downloads = lib.hm.dag.entryAfter [
+      "writeBoundary"
+    ] ''run mkdir -p ${config.home.homeDirectory}/Downloads'';
+    documents = lib.hm.dag.entryAfter [
+      "writeBoundary"
+    ] ''mkdir -p ${config.home.homeDirectory}/Documents'';
+    pictures = lib.hm.dag.entryAfter [
+      "writeBoundary"
+    ] ''mkdir -p ${config.home.homeDirectory}/Pictures'';
+    projects = lib.hm.dag.entryAfter [
+      "writeBoundary"
+    ] ''mkdir -p ${config.home.homeDirectory}/Projects'';
+    videos = lib.hm.dag.entryAfter [ "writeBoundary" ] ''mkdir ${config.home.homeDirectory}/Videos'';
+  };
 
   wayland.windowManager.hyprland.settings.exec-once = [ "hyprpanel" ];
 
