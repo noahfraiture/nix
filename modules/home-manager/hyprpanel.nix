@@ -42,7 +42,9 @@ in
     projects = lib.hm.dag.entryAfter [
       "writeBoundary"
     ] ''mkdir -p ${config.home.homeDirectory}/Projects'';
-    videos = lib.hm.dag.entryAfter [ "writeBoundary" ] ''mkdir ${config.home.homeDirectory}/Videos'';
+    videos = lib.hm.dag.entryAfter [
+      "writeBoundary"
+    ] ''mkdir -p ${config.home.homeDirectory}/Videos'';
   };
 
   wayland.windowManager.hyprland.settings.exec-once = [ "hyprpanel" ];
