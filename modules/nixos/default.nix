@@ -48,5 +48,4 @@
     fonts.enable = lib.mkEnableOption "pkgs fonts";
     graphical.enable = lib.mkEnableOption "graphical stuffs";
   };
-
 }

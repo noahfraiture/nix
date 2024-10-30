@@ -15,11 +15,13 @@
     ../../modules/nixos/default.nix
     ../../modules/nixos/spicetify.nix
     ../../modules/nixos/stylix.nix
+    ../../modules/nixos/tailscale.nix
   ];
 
   sddm.enable = true;
   fonts.enable = true;
   graphical.enable = true;
+  # steam.enable = true;
 
   time.timeZone = "Europe/Brussels";
   i18n.defaultLocale = "en_US.UTF-8";

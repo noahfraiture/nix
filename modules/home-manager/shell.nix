@@ -7,7 +7,6 @@
 {
   home.packages = with pkgs; [
     # pokemon-colorscripts-mac # Display pokemon
-    lshw # Display information about gpu
     zoxide # Smarter cd
   ];
 

@@ -18,11 +18,7 @@
           timeout = 600;
           on-timeout = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
         }
-
-        {
-          timeout = 660;
-          # on-timeout = "systemctl suspend"; // FIX: suspend make crash. May be because of VM
-        }
+        # Could add suspend
       ];
     };
   };

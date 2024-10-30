@@ -9,7 +9,10 @@ let
 
   gui = with pkgs; [
     # Gui
+
     bruno
+    firefox-devedition
+    # FIX : gparted ? Not useful but part of bigger problem
     gparted
     obsidian
     onlyoffice-bin
@@ -20,6 +23,7 @@ let
     vlc
     vscode
     zed-editor
+
   ];
 
   shell = with pkgs; [
@@ -32,15 +36,18 @@ let
     nvtopPackages.full # GPU tracker
     onefetch # Information about git repo
     powertop # Power tracker
+    p7zip # zip tool
+    ripgrep-all # Search for substring
+    yazi # file explorer
 
   ];
 
   language = with pkgs; [
     # Language
-    python3
     cargo
-    go
     deno
+    go
+    python3
     texliveFull
   ];
 
@@ -60,6 +67,8 @@ in
     home.packages =
       [
         pkgs.flatpak
+        pkgs.wol
+        pkgs.wineWowPackages.waylandFull
       ]
       ++ (if config.gui.enable then gui else [ ])
       ++ (if config.shell.enable then shell else [ ])
