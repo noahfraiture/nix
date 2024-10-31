@@ -95,6 +95,7 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
+    plugins = [ inputs.Hyprspace.packages.${pkgs.system}.Hyprspace ];
 
     settings = {
       exec-once = [
