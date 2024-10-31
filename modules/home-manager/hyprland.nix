@@ -160,6 +160,7 @@ in
         "$mod, O, exec, ${browser}"
 
         "$mod, A, exec, ags -t applauncher"
+        "$mod, SPACE, exec, rofi -show drun"
         # TODO : swww + wallbash or stylix to change theme
         # TODO : clipboard
 

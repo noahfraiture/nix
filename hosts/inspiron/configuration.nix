@@ -15,7 +15,7 @@
     ../../modules/nixos/default.nix
     ../../modules/nixos/spicetify.nix
     ../../modules/nixos/stylix.nix
-    # ../../modules/nixos/tailscale.nix
+    ../../modules/nixos/tailscale.nix
   ];
 
   sddm.enable = true;
@@ -66,6 +66,7 @@
         ../../modules/home-manager/hyprpanel.nix
         ../../modules/home-manager/kitty.nix
         ../../modules/home-manager/packages.nix
+        ../../modules/home-manager/rofi.nix
         ../../modules/home-manager/shell.nix
         ../../modules/home-manager/starship.nix
         ../../modules/home-manager/stylix.nix
