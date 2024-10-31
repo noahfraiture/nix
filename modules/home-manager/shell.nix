@@ -47,6 +47,7 @@
       cdi = "__zoxide_zi";
       icat = "kitten icat";
       ssh = "kitten ssh";
+      develop = "nix develop -c nu";
     };
   };
 

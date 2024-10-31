@@ -1,0 +1,3 @@
+[submodule "dev-templates"]
+	path = shells/dev-templates
+	url = git@github.com:the-nix-way/dev-templates.git

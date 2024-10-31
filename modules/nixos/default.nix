@@ -23,6 +23,8 @@
       };
     };
 
+    users.defaultUserShell = pkgs.nushell;
+
     environment.systemPackages =
       with pkgs;
       [
