@@ -15,7 +15,7 @@
     ../../modules/nixos/default.nix
     ../../modules/nixos/spicetify.nix
     ../../modules/nixos/stylix.nix
-    ../../modules/nixos/tailscale.nix
+    # ../../modules/nixos/tailscale.nix
   ];
 
   sddm.enable = true;

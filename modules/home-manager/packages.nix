@@ -10,19 +10,18 @@ let
   gui = with pkgs; [
     # Gui
 
-    bruno
-    firefox-devedition
-    # FIX : gparted ? Not useful but part of bigger problem
-    gparted
-    obsidian
-    onlyoffice-bin
-    opera
-    qbittorrent
-    quickemu
-    spotify
-    vlc
-    vscode
-    zed-editor
+    # bruno
+    # firefox-devedition
+    # gparted # FIXME ? 
+    # obsidian
+    # onlyoffice-bin
+    # opera
+    # qbittorrent
+    # quickemu
+    # spotify
+    # vlc
+    # vscode
+    # zed-editor
 
   ];
 
