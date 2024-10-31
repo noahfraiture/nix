@@ -52,12 +52,6 @@
     };
   };
 
-  # GnuPG
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = false;
-  };
-
   # Man page completion
   documentation.man.generateCaches = true;
 

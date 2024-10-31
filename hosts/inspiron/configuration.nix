@@ -46,12 +46,6 @@
   # SSH
   services.openssh.enable = true;
 
-  # GnuPG
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
   # Man page completion
   documentation.man.generateCaches = true;
 

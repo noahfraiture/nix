@@ -84,6 +84,10 @@ in
         notARepository = "skip";
       };
     };
+
+    programs.gpg = lib.mkIf config.shell.enable {
+      enable = true;
+    };
   };
 
 }
