@@ -40,6 +40,20 @@
       }
     '';
 
+    extraConfig = ''
+        $env.config = {
+        hooks: {
+          pre_prompt: [{ ||
+            if (which direnv | is-empty) {
+              return
+            }
+
+            direnv export json | from json | default {} | load-env
+          }]
+        }
+      }
+    '';
+
     shellAliases = {
       lg = lib.mkIf config.lazygit.enable "lazygit";
       ld = "lazydocker";
@@ -48,6 +62,10 @@
       icat = "kitten icat";
       ssh = "kitten ssh";
       develop = "nix develop -c nu";
+    };
+
+    environmentVariables = {
+      DIRENV_LOG_FORMAT = "''";
     };
   };
 
@@ -67,6 +85,12 @@
   programs.carapace = {
     enable = true;
     enableNushellIntegration = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableNushellIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.git = {
