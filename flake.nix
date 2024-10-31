@@ -10,8 +10,10 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     ags.url = "github:Aylur/ags";
+
     stylix.url = "github:danth/stylix";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";

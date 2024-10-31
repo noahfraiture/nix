@@ -27,27 +27,27 @@ let
 
   shell = with pkgs; [
     # Shell
-    btop # Hardware tracker
-    carapace # shell completion
-    fastfetch # Repo information
-    gdu # Disk tracker
-    lazydocker # Docker manager
-    nvtopPackages.full # GPU tracker
-    onefetch # Information about git repo
-    powertop # Power tracker
-    p7zip # zip tool
-    ripgrep-all # Search for substring
-    yazi # file explorer
+    # btop # Hardware tracker
+    # carapace # shell completion
+    # fastfetch # Repo information
+    # gdu # Disk tracker
+    # lazydocker # Docker manager
+    # nvtopPackages.full # GPU tracker
+    # onefetch # Information about git repo
+    # powertop # Power tracker
+    # p7zip # zip tool
+    # ripgrep-all # Search for substring
+    # yazi # file explorer
 
   ];
 
   language = with pkgs; [
     # Language
-    cargo
-    deno
-    go
-    python3
-    texliveFull
+    # cargo
+    # deno
+    # go
+    # python3
+    # texliveFull
   ];
 
 in
