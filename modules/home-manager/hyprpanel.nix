@@ -64,19 +64,24 @@ in
           },
           
           "bar.workspaces": {
-            "show_numbered": false,
-            "monitorSpecific": true,
-            "hideUnoccupied": true,
-            "workspaces": 5,
-            "show_icons": true
-          },
-          "bar.workspaces": {
             "windowtitle.label": true,
             "volume.label": true,
             "network.truncation_size": 12,
             "bluetooth.label": true,
             "clock.format": "%a %b %e  %H:%M",
-            "notifications.show_total": true
+            "notifications.show_total": true,
+
+            "monitorSpecific": true,
+            "hideUnoccupied": true,
+            "workspaces": 5,
+            "numbered_active_indicator": "highlight",
+            "showWsIcons": true,
+            "workspaceIconMap": {
+              "[dD]iscord": "󰙯",
+              "title:YouTube": "",
+              "class:kitty": "󰄛",
+              "class:Opera": ""
+            }
           },
 
           "bar.customModules.storage.leftClick": "gdu",
