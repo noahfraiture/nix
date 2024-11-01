@@ -34,25 +34,25 @@
     { self, nixpkgs, ... }@inputs:
     {
       nixosConfigurations = {
-        inspiron = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
+        inspiron =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+              inherit system;
+            };
+            modules = [
+              { nixpkgs.overlays = [ inputs.hyprpanel.overlay ]; }
+
+              ./hosts/inspiron/configuration.nix
+              inputs.home-manager.nixosModules.home-manager
+              inputs.stylix.nixosModules.stylix
+              inputs.nix-flatpak.nixosModules.nix-flatpak
+              inputs.spicetify-nix.nixosModules.default # TODO : move that in home-manager
+            ];
           };
-          system = "x86_64-linux";
-          modules = [
-            {
-              nixpkgs.overlays = [ inputs.hyprpanel.overlay ];
-              _module.args = {
-                inherit inputs;
-              };
-            }
-            ./hosts/inspiron/configuration.nix
-            inputs.home-manager.nixosModules.home-manager
-            inputs.stylix.nixosModules.stylix
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.spicetify-nix.nixosModules.default # TODO : move that in home-manager
-          ];
-        };
         bitfenix = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;

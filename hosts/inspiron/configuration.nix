@@ -51,16 +51,26 @@
   documentation.man.generateCaches = true;
 
   specialisation = {
-    normal.configuration = {
+    dark-normal.configuration = {
       home-manager.users."noah".zen.enable = false;
+      theme.option = "dark";
     };
-    zen.configuration = {
+    dark-zen.configuration = {
       home-manager.users."noah".zen.enable = true;
+      theme.option = "dark";
+    };
+    light-normal.configuration = {
+      home-manager.users."noah".zen.enable = false;
+      theme.option = "light";
+    };
+    light-zen.configuration = {
+      home-manager.users."noah".zen.enable = true;
+      theme.option = "light";
     };
   };
 
   home-manager = {
-    backupFileExtension = "bakbak";
+    backupFileExtension = "bak";
     extraSpecialArgs = {
       inherit inputs;
     };
@@ -80,7 +90,6 @@
         ../../modules/home-manager/rofi.nix
         ../../modules/home-manager/shell.nix
         ../../modules/home-manager/starship.nix
-        ../../modules/home-manager/stylix.nix
         ../../modules/home-manager/zellij.nix
 
       ];

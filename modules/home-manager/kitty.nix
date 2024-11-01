@@ -83,6 +83,8 @@ let
   fontSize = config.stylix.fonts.sizes.terminal;
 in
 {
+  stylix.targets.kitty.enable = false;
+
   programs.kitty = {
     enable = true;
     keybindings = {

@@ -74,7 +74,7 @@
 
   # Shell history
   programs.atuin = {
-    enable = true;
+    enable = false;
     enableNushellIntegration = true;
     flags = [
       "--disable-up-arrow"
