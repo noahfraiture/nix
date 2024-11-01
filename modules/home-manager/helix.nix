@@ -22,6 +22,9 @@
       };
 
       keys = {
+        select = {
+          "C-;" = [ "flip_selections" ];
+        };
         insert = {
           "C-s" = [
             ":w"
@@ -47,8 +50,10 @@
 
           "'" = [ "expand_selection" ];
           "C-'" = [ "shrink_selection" ];
-
           "C-;" = [ "flip_selections" ];
+          "C-x" = "split_selection_on_newline";
+          "C-X" = "merge_selections";
+          "C-i" = "save_selection";
 
           "backspace" = [
             "move_char_left"
