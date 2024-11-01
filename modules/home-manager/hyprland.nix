@@ -41,13 +41,15 @@ in
   config = {
     wayland.windowManager.hyprland = {
       enable = true;
-      # plugins = [ inputs.Hyprspace.packages.${pkgs.system}.Hyprspace ];
+      plugins = [ inputs.hyprspace.packages.${pkgs.system}.Hyprspace ];
 
       settings = {
         exec-once = [
           ''${startupScript}/bin/start''
           "hyprctl setcursor Qogir 24"
         ];
+
+        plugin = { overview = { autoDrag = false; }; };
 
         input = {
           kb_options = "caps:swapescape";

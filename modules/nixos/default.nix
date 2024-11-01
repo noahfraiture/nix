@@ -36,7 +36,6 @@
       ++ (
         if config.graphical.enable then
           [
-            pkgs.hyprpanel
             pkgs.libsForQt5.qt5.qtgraphicaleffects # required for sugar candy
           ]
         else

@@ -38,7 +38,7 @@
       "docker"
     ];
     openssh.authorizedKeys.keys = [
-      # inspirion
+      # inspiron
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDksZIDlMfNKEJdCc2l5gPb+r60jzmpn+//jHjK63H1x pro@noahcode.dev"
     ];
   };

@@ -15,6 +15,7 @@
     ../../modules/nixos/default.nix
     ../../modules/nixos/spicetify.nix
     ../../modules/nixos/stylix.nix
+    ../../modules/nixos/openvpn.nix
     # ../../modules/nixos/tailscale.nix
   ];
 
@@ -73,6 +74,7 @@
         ../../modules/home-manager/hyprland.nix
         ../../modules/home-manager/hyprlock.nix
         ../../modules/home-manager/hyprpanel.nix
+        ../../modules/home-manager/hyprpaper.nix
         ../../modules/home-manager/kitty.nix
         ../../modules/home-manager/packages.nix
         ../../modules/home-manager/rofi.nix

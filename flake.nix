@@ -13,7 +13,7 @@
 
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
-    Hyprspace = {
+    hyprspace = {
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
