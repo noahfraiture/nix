@@ -29,8 +29,8 @@ let
     fi
   '';
 
-  term = "kitty";
-  browser = "opera";
+  term = "${pkgs.kitty}/bin/kitty";
+  browser = "${pkgs.opera}/bin/opera";
 
 in
 {
@@ -69,8 +69,13 @@ in
           pseudotile = true;
           preserve_split = true;
           smart_split = true;
-          no_gaps_when_only = 1;
         };
+
+        workspace = [
+          "w[t1], gapsin:0, gapsout:0, border:0"
+          "w[tg1], gapsin:0, gapsout:0, border:0"
+          "f[1], gapsin:0, gapsout:0, border:0"
+        ];
 
         misc = {
           disable_hyprland_logo = true;
@@ -137,7 +142,6 @@ in
 
         xwayland.force_zero_scaling = true;
 
-        # TODO : replace kitty by env variable
         "$mod" = "ALT";
 
         bindm = [

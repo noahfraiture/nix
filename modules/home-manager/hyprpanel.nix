@@ -47,7 +47,7 @@ in
     ] ''mkdir -p ${config.home.homeDirectory}/Videos'';
   };
 
-  wayland.windowManager.hyprland.settings.exec-once = [ "hyprpanel" ];
+  wayland.windowManager.hyprland.settings.exec-once = [ "${pkgs.hyprpanel}/bin/hyprpanel" ];
 
   # "*" mean : all monitors. We cna provide specific monitors with its number.
   # e.g. "2": {"left": []}

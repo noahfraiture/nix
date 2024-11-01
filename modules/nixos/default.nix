@@ -11,7 +11,7 @@
       with pkgs;
       lib.mkIf config.fonts.enable [
         noto-fonts
-        noto-fonts-cjk
+        noto-fonts-cjk-sans
         noto-fonts-emoji
         nerdfonts
       ];

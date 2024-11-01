@@ -21,7 +21,6 @@
     };
 
     environment.sessionVariables = {
-      # WLR_MO_HARDWARE_CURSOR = "1";
       NIXOS_OZONE_WL = "1";
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
