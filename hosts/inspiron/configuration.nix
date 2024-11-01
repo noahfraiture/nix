@@ -15,7 +15,7 @@
     ../../modules/nixos/default.nix
     ../../modules/nixos/spicetify.nix
     ../../modules/nixos/stylix.nix
-    ../../modules/nixos/tailscale.nix
+    # ../../modules/nixos/tailscale.nix
   ];
 
   sddm.enable = true;
@@ -48,6 +48,15 @@
 
   # Man page completion
   documentation.man.generateCaches = true;
+
+  specialisation = {
+    normal.configuration = {
+      home-manager.users."noah".zen.enable = false;
+    };
+    zen.configuration = {
+      home-manager.users."noah".zen.enable = true;
+    };
+  };
 
   home-manager = {
     backupFileExtension = "bakbak";
