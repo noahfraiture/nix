@@ -18,6 +18,8 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
+
     ags.url = "github:Aylur/ags";
 
     stylix.url = "github:danth/stylix";
@@ -34,24 +36,25 @@
     { self, nixpkgs, ... }@inputs:
     {
       nixosConfigurations = {
-        inspiron =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-              inherit system;
-            };
-            modules = [
-              { nixpkgs.overlays = [ inputs.hyprpanel.overlay ]; }
-
-              ./hosts/inspiron/configuration.nix
-              inputs.home-manager.nixosModules.home-manager
-              inputs.stylix.nixosModules.stylix
-              inputs.nix-flatpak.nixosModules.nix-flatpak
-            ];
+        inspiron = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
           };
+          system = "x86_64-linux";
+          modules = [
+            {
+              nixpkgs.overlays = [ inputs.hyprpanel.overlay ];
+              _module.args = {
+                inherit inputs;
+              };
+            }
+
+            ./hosts/inspiron/configuration.nix
+            inputs.home-manager.nixosModules.home-manager
+            inputs.stylix.nixosModules.stylix
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+          ];
+        };
         bitfenix = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;

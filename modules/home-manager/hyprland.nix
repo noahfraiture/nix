@@ -40,14 +40,21 @@ in
   };
 
   config = {
+
+    home.packages = [ inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent ];
+
     wayland.windowManager.hyprland = {
       enable = true;
+      xwayland.enable = true;
+      systemd.enable = true;
+      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       plugins = [ inputs.hyprspace.packages.${pkgs.system}.Hyprspace ];
 
       settings = {
         exec-once = [
           ''${startupScript}/bin/start''
           "hyprctl setcursor Qogir 24"
+          "systemctl --user start hyprpolkitagent"
         ];
 
         plugin = {

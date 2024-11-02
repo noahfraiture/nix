@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -33,42 +32,7 @@ let
   fontSize = "${toString config.stylix.fonts.sizes.desktop}";
 in
 {
-
-  home.packages = with pkgs; [
-    ## Resource monitoring modules
-    libgtop
-
-    ## Bluetooth menu utilities
-    bluez
-    bluez-tools
-
-    ## Copy/Paste utilities
-    wl-clipboard
-
-    ## Compiler for sass/scss
-    dart-sass
-
-    ## Brightness module for OSD
-    brightnessctl
-
-    ## Used for Tracking GPU Usage in your Dashboard (NVidia only)
-    python312Packages.gpustat
-
-    ## To switch between power profiles in the battery module
-    power-profiles-daemon
-
-    ## To take snapshots with the default snapshot shortcut in the dashboard
-    grimblast
-
-    ## To record screen through the dashboard record shortcut
-    gpu-screen-recorder
-
-    ## To enable the eyedropper color picker with the default snapshot shortcut in the dashboard
-    hyprpicker
-
-    ## To click resource/stat bars in the dashboard and open btop
-    btop
-  ];
+  wayland.windowManager.hyprland.settings.exec-once = [ "hyprpanel" ];
 
   home.activation = {
     downloads = lib.hm.dag.entryAfter [
@@ -87,9 +51,6 @@ in
       "writeBoundary"
     ] ''mkdir -p ${config.home.homeDirectory}/Videos'';
   };
-
-  # wayland.windowManager.hyprland.settings.exec-once = [ "${pkgs.hyprpanel}/bin/hyprpanel" ];
-  wayland.windowManager.hyprland.settings.exec-once = [ "hyprpanel" ];
 
   # "*" mean : all monitors. We cna provide specific monitors with its number.
   # e.g. "2": {"left": []}

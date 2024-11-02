@@ -14,6 +14,7 @@
 
     ../../modules/nixos/default.nix
     ../../modules/nixos/stylix.nix
+    ../../modules/nixos/hyprpanel.nix
     # ../../modules/nixos/openvpn.nix
     # ../../modules/nixos/tailscale.nix
   ];
@@ -80,7 +81,6 @@
         ../../modules/home-manager/hyprland.nix
         ../../modules/home-manager/hyprlock.nix
         ../../modules/home-manager/hyprpanel.nix
-        ../../modules/home-manager/hyprpaper.nix
         ../../modules/home-manager/kitty.nix
         ../../modules/home-manager/nushell.nix
         ../../modules/home-manager/packages.nix
