@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   config,
   lib,
@@ -49,7 +50,11 @@ in
           "hyprctl setcursor Qogir 24"
         ];
 
-        plugin = { overview = { autoDrag = false; }; };
+        plugin = {
+          overview = {
+            autoDrag = false;
+          };
+        };
 
         input = {
           kb_options = "caps:swapescape";
@@ -161,7 +166,7 @@ in
           ''$mod, P, exec, ${pinScript}/bin/pin'' # toggle pin on focused window
           "$mod, B, exec, hyprctl setprop active opaque toggle" # toggle opaque on window
           "$mod, ESCAPE, exec, hyprpanel -t powermenu"
-          # "$mod, TAB, overview:toggle"
+          "$mod, TAB, overview:toggle"
           # TODO : zen mode
 
           # Applications shortcuts

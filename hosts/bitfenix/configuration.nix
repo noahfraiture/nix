@@ -52,9 +52,6 @@
     };
   };
 
-  # Man page completion
-  documentation.man.generateCaches = true;
-
   home-manager = {
     backupFileExtension = "bak";
     extraSpecialArgs = {
@@ -65,6 +62,7 @@
         ./home.nix
 
         ../../modules/home-manager/helix.nix
+        ../../modules/home-manager/nushell.nix
         ../../modules/home-manager/packages.nix
         ../../modules/home-manager/shell.nix
         ../../modules/home-manager/starship.nix

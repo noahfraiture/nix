@@ -13,9 +13,8 @@
     ./hyprland.nix
 
     ../../modules/nixos/default.nix
-    ../../modules/nixos/spicetify.nix
     ../../modules/nixos/stylix.nix
-    ../../modules/nixos/openvpn.nix
+    # ../../modules/nixos/openvpn.nix
     # ../../modules/nixos/tailscale.nix
   ];
 
@@ -46,9 +45,6 @@
 
   # SSH
   services.openssh.enable = true;
-
-  # Man page completion
-  documentation.man.generateCaches = true;
 
   specialisation = {
     dark-normal.configuration = {
@@ -86,9 +82,11 @@
         ../../modules/home-manager/hyprpanel.nix
         ../../modules/home-manager/hyprpaper.nix
         ../../modules/home-manager/kitty.nix
+        ../../modules/home-manager/nushell.nix
         ../../modules/home-manager/packages.nix
         ../../modules/home-manager/rofi.nix
         ../../modules/home-manager/shell.nix
+        ../../modules/home-manager/spicetify.nix
         ../../modules/home-manager/starship.nix
         ../../modules/home-manager/zellij.nix
 

@@ -1,7 +1,5 @@
 {
   pkgs,
-  lib,
-  config,
   ...
 }:
 {
@@ -10,86 +8,18 @@
     zoxide # Smarter cd
   ];
 
-  programs.zoxide = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
-  programs.nushell = {
-    enable = true;
-    configFile.text = ''
-      $env.config = {
-        show_banner: false
-        edit_mode: vi
-      }
-      $env.EDITOR = "hx"
-      $env.VISUAL = "hx"
-
-      def rebuild [name] = {sudo nixos-rebuild switch --flake $"/etc/nixos/#($name)"}
-
-      def awake [name] = {
-        match $name {
-          "bitfenix" => { wol d8:bb:c1:52:6c:f0 }
-          _ => "MAC not known"
-        }
-      }
-
-      def theme [ color ] = {
-        sudo /nix/var/nix/profiles/system/specialisation/($color)/bin/switch-to-configuration switch
-        ps | find hx | select pid | each { sudo kill -s 10 $in.pid | ignore }
-      }
-    '';
-
-    extraConfig = ''
-        $env.config = {
-        hooks: {
-          pre_prompt: [{ ||
-            if (which direnv | is-empty) {
-              return
-            }
-
-            direnv export json | from json | default {} | load-env
-          }]
-        }
-      }
-    '';
-
-    shellAliases = {
-      lg = lib.mkIf config.lazygit.enable "lazygit";
-      ld = "lazydocker";
-      cd = "__zoxide_z";
-      cdi = "__zoxide_zi";
-      icat = "kitten icat";
-      ssh = "kitten ssh";
-      develop = "nix develop -c nu";
-    };
-
-    environmentVariables = {
-      DIRENV_LOG_FORMAT = "''";
-    };
-  };
-
-  # Man page completion
-  programs.man.generateCaches = true;
+  programs.zoxide.enable = true;
 
   # Shell history
   programs.atuin = {
     enable = false;
-    enableNushellIntegration = true;
     flags = [
       "--disable-up-arrow"
     ];
   };
 
-  # Completion multi-shell
-  programs.carapace = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
   programs.direnv = {
     enable = true;
-    enableNushellIntegration = true;
     nix-direnv.enable = true;
   };
 

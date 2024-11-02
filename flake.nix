@@ -50,7 +50,6 @@
               inputs.home-manager.nixosModules.home-manager
               inputs.stylix.nixosModules.stylix
               inputs.nix-flatpak.nixosModules.nix-flatpak
-              inputs.spicetify-nix.nixosModules.default # TODO : move that in home-manager
             ];
           };
         bitfenix = nixpkgs.lib.nixosSystem {
