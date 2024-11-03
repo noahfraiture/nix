@@ -40,16 +40,19 @@ in
     ] ''run mkdir -p ${config.home.homeDirectory}/Downloads'';
     documents = lib.hm.dag.entryAfter [
       "writeBoundary"
-    ] ''mkdir -p ${config.home.homeDirectory}/Documents'';
+    ] ''run mkdir -p ${config.home.homeDirectory}/Documents'';
     pictures = lib.hm.dag.entryAfter [
       "writeBoundary"
-    ] ''mkdir -p ${config.home.homeDirectory}/Pictures'';
+    ] ''run mkdir -p ${config.home.homeDirectory}/Pictures'';
     projects = lib.hm.dag.entryAfter [
       "writeBoundary"
-    ] ''mkdir -p ${config.home.homeDirectory}/Projects'';
+    ] ''run mkdir -p ${config.home.homeDirectory}/Projects'';
     videos = lib.hm.dag.entryAfter [
       "writeBoundary"
-    ] ''mkdir -p ${config.home.homeDirectory}/Videos'';
+    ] ''run mkdir -p ${config.home.homeDirectory}/Videos'';
+    clean = lib.hm.dag.entryAfter [
+      "writeBoundary"
+    ] ''run rm -rf ${config.home.homeDirectory}/.cache/ags/hyprpanel'';
   };
 
   # "*" mean : all monitors. We cna provide specific monitors with its number.

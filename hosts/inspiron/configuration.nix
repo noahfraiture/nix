@@ -48,20 +48,10 @@
   services.openssh.enable = true;
 
   specialisation = {
-    dark-normal.configuration = {
-      home-manager.users."noah".zen.enable = false;
+    dark.configuration = {
       theme.option = "dark";
     };
-    dark-zen.configuration = {
-      home-manager.users."noah".zen.enable = true;
-      theme.option = "dark";
-    };
-    light-normal.configuration = {
-      home-manager.users."noah".zen.enable = false;
-      theme.option = "light";
-    };
-    light-zen.configuration = {
-      home-manager.users."noah".zen.enable = true;
+    light.configuration = {
       theme.option = "light";
     };
   };

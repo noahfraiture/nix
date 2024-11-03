@@ -7,8 +7,6 @@
 }:
 
 let
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" '''';
-
   pinScript = pkgs.pkgs.writeShellScriptBin "pin" ''
     # enable float
     WinFloat=$(hyprctl -j clients | jq '.[] | select(.focusHistoryID == 0) | .floating')
@@ -27,6 +25,34 @@ let
 
     if [ "$WinFloat" == "true" ] && [ "$WinPinned" == "false" ] ; then
         hyprctl dispatch togglefloating active
+    fi
+  '';
+
+  zenScript = pkgs.pkgs.writeShellScriptBin "zen" ''
+    FILE="${config.home.homeDirectory}/.config/hypr/zen.conf"
+    SIZE=$(wc -c <"$FILE")
+    MIN=2
+    if [ $MIN -ge $SIZE ]; then
+      cat << 'EOF' > $FILE
+    animations { 
+      enabled=false
+    }
+    general {
+      border_size=1
+      gaps_in=0
+      gaps_out=0
+    }
+    decoration {
+      blur {
+        enabled=false
+      }
+      active_opacity=1
+      inactive_opacity=1
+      rounding=0
+    }
+    EOF
+    else
+      > "$FILE"
     fi
   '';
 
@@ -50,9 +76,10 @@ in
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       plugins = [ inputs.hyprspace.packages.${pkgs.system}.Hyprspace ];
 
+      sourceFirst = false;
+
       settings = {
         exec-once = [
-          ''${startupScript}/bin/start''
           "hyprctl setcursor Qogir 24"
           "systemctl --user start hyprpolkitagent"
         ];
@@ -174,7 +201,7 @@ in
           "$mod, B, exec, hyprctl setprop active opaque toggle" # toggle opaque on window
           "$mod, ESCAPE, exec, hyprpanel -t powermenu"
           "$mod, TAB, overview:toggle"
-          # TODO : zen mode
+          ''$mod, Z, exec, ${zenScript}/bin/zen'' # Zen mode
 
           # Applications shortcuts
           "$mod, T, exec, ${term}"
@@ -267,6 +294,10 @@ in
           "$mod&Control_L, 8, workspace, 8"
           "$mod&Control_L, 9, workspace, 9"
           "$mod&Control_L, 0, workspace, 10"
+        ];
+
+        source = [
+          "~/.config/hypr/zen.conf"
         ];
       };
     };
