@@ -19,7 +19,8 @@
     # ../../modules/nixos/tailscale.nix
   ];
 
-  sddm.enable = true;
+  greetd.enable = true;
+  sddm.enable = false;
   fonts.enable = true;
   graphical.enable = true;
   # steam.enable = true;
@@ -88,6 +89,7 @@
       exegol.enable = true;
       wakatime.enable = true;
       lazygit.enable = true;
+      hyprlock.enable = true;
 
     };
   };

@@ -63,6 +63,7 @@ in
 {
   options = {
     zen.enable = lib.mkEnableOption "Zen mode";
+    hyprlock.enable = lib.mkEnableOption "Instant hyprlock";
   };
 
   config = {
@@ -82,7 +83,7 @@ in
         exec-once = [
           "hyprctl setcursor Qogir 24"
           "systemctl --user start hyprpolkitagent"
-        ];
+        ] ++ (if config.hyprlock.enable then [ "${pkgs.hyprlock}/bin/hyprlock --immediate" ] else [ ]);
 
         plugin = {
           overview = {

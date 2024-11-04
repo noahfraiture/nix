@@ -16,10 +16,22 @@
         nerdfonts
       ];
 
-    services = lib.mkIf config.sddm.enable {
-      displayManager.sddm = {
+    services = {
+      displayManager = {
+        sddm = lib.mkIf config.sddm.enable {
+          enable = true;
+          theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+        };
+      };
+      greetd = lib.mkIf config.greetd.enable {
         enable = true;
-        theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+        settings = rec {
+          initial_session = {
+            command = "${pkgs.hyprland}/bin/Hyprland";
+            user = "noah";
+          };
+          default_session = initial_session;
+        };
       };
     };
 
@@ -33,19 +45,13 @@
         wget
         nushell
       ]
-      ++ (
-        if config.graphical.enable then
-          [
-            pkgs.libsForQt5.qt5.qtgraphicaleffects # required for sugar candy
-          ]
-        else
-          [ ]
-      );
+      ++ (if config.graphical.enable then [ pkgs.libsForQt5.qt5.qtgraphicaleffects ] else [ ]);
 
   };
 
   options = {
     sddm.enable = lib.mkEnableOption "enable ssdm";
+    greetd.enable = lib.mkEnableOption "enable greetd";
     fonts.enable = lib.mkEnableOption "pkgs fonts";
     graphical.enable = lib.mkEnableOption "graphical stuffs";
   };

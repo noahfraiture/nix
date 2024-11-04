@@ -57,6 +57,8 @@ in
 
   # "*" mean : all monitors. We cna provide specific monitors with its number.
   # e.g. "2": {"left": []}
+  # TODO : use json
+  # TODO : reload `ags -q; ags`
   home.file.".cache/ags/hyprpanel/options.json" = {
     text = # json
       ''
