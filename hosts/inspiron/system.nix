@@ -28,7 +28,7 @@
     };
   };
 
-  networking.hostName = "nixos";
+  networking.hostName = "inspiron";
   networking.networkmanager.enable = true;
 
   hardware.bluetooth = {
@@ -46,6 +46,8 @@
         STOP_CHARGE_TRESH_BAT0 = 80;
       };
     };
+    blueman.enable = true;
+    upower.enable = true;
   };
 
   boot = {

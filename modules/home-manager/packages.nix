@@ -36,7 +36,7 @@ let
     onefetch # Information about git repo
     powertop # Power tracker
     p7zip # zip tool
-    ripgrep-all # Search for substring
+    ripgrep # Search for substring
     yazi # file explorer
 
   ];
