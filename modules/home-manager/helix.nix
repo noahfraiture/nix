@@ -552,6 +552,7 @@
     golangci-lint-langserver # lsp needed for the go linter
     texlab
     svelte-language-server
+    deno
 
     # Add wakatime-lsp installation
     (rustPlatform.buildRustPackage {

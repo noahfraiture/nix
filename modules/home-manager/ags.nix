@@ -1,6 +1,20 @@
-{ inputs, pkgs, ... }:
+{
+  lib,
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [ inputs.ags.homeManagerModules.default ];
+
+  home.packages = with pkgs; [
+    bun
+    translate-shell
+    papirus-icon-theme
+    brightnessctl
+    sassc
+  ];
 
   programs.ags = {
     enable = true;
@@ -12,5 +26,16 @@
       webkitgtk
       accountsservice
     ];
+  };
+
+  gtk.iconTheme = {
+    name = "Papirus";
+    package = pkgs.papirus-icon-theme;
+  };
+
+  home.activation = {
+    cleanAgs = lib.hm.dag.entryAfter [
+      "writeBoundary"
+    ] ''run rm -rf ${config.home.homeDirectory}/.cache/ags'';
   };
 }

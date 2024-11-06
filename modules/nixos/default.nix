@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -37,15 +38,25 @@
 
     users.defaultUserShell = pkgs.nushell;
 
+    # TODO : move swww
     environment.systemPackages =
       with pkgs;
       [
+
         vim
         git
         wget
         nushell
       ]
-      ++ (if config.graphical.enable then [ pkgs.libsForQt5.qt5.qtgraphicaleffects ] else [ ]);
+      ++ (
+        if config.graphical.enable then
+          [
+            pkgs.libsForQt5.qt5.qtgraphicaleffects
+            inputs.swww.packages.${pkgs.system}.swww
+          ]
+        else
+          [ ]
+      );
 
   };
 

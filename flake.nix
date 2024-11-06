@@ -30,6 +30,8 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    swww.url = "github:LGFae/swww";
   };
 
   outputs =

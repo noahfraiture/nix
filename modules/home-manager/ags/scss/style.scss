@@ -1,0 +1,15 @@
+@import "colors.scss";
+
+@import "lib.scss";
+
+@import "widgets/app-launcher.scss";
+@import "widgets/progress.scss";
+@import "widgets/wallpaper-switcher.scss";
+
+// Use the variables in the styles
+window {
+  background-color: transparent;
+  transition: all 1s;
+  font-size: 10px;
+  // animation: fade-in 5s;
+}

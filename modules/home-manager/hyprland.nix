@@ -83,6 +83,7 @@ in
         exec-once = [
           "hyprctl setcursor Qogir 24"
           "systemctl --user start hyprpolkitagent"
+          "sleep 3 && swww-daemon"
         ] ++ (if config.hyprlock.enable then [ "${pkgs.hyprlock}/bin/hyprlock --immediate" ] else [ ]);
 
         plugin = {
@@ -195,7 +196,7 @@ in
           # Window/Session actions
           "$mod, Q, killactive"
           "$mod, Delete, exit," # kill hyprland session
-          "$mod, W, togglefloating," # toggle the window between focus and float
+          "$mod, D, togglefloating," # toggle the window between focus and float
           "$mod, G, togglegroup," # toggle the window between focus and group
           "$mod, F, fullscreen," # toggle the window between focus and fullscreen
           ''$mod, P, exec, ${pinScript}/bin/pin'' # toggle pin on focused window
@@ -208,8 +209,9 @@ in
           "$mod, T, exec, ${term}"
           "$mod, O, exec, ${browser}"
 
-          "$mod, A, exec, ags -t applauncher"
-          "$mod, SPACE, exec, rofi -show drun"
+          "$mod, SPACE, exec, ags -t app-launcher"
+          "$mod, W, exec, ags -t wallpaper-switcher"
+          "$mod, C, exec, ags -t color-switcher"
           # TODO : swww + wallbash or stylix to change theme
           # TODO : clipboard
 

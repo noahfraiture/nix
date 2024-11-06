@@ -32,7 +32,7 @@ let
   fontSize = "${toString config.stylix.fonts.sizes.desktop}";
 in
 {
-  wayland.windowManager.hyprland.settings.exec-once = [ "hyprpanel" ];
+  wayland.windowManager.hyprland.settings.exec-once = [ "hyprpanel -b hypr" ];
 
   home.activation = {
     downloads = lib.hm.dag.entryAfter [
@@ -50,7 +50,7 @@ in
     videos = lib.hm.dag.entryAfter [
       "writeBoundary"
     ] ''run mkdir -p ${config.home.homeDirectory}/Videos'';
-    clean = lib.hm.dag.entryAfter [
+    cleanHyprpanel = lib.hm.dag.entryAfter [
       "writeBoundary"
     ] ''run rm -rf ${config.home.homeDirectory}/.cache/ags/hyprpanel'';
   };

@@ -32,11 +32,6 @@
           _ => "MAC not known"
         }
       }
-
-      def theme [ color ] = {
-        sudo /nix/var/nix/profiles/system/specialisation/($color)/bin/switch-to-configuration switch
-        ps | find hx | select pid | each { sudo kill -s 10 $in.pid | ignore }
-      }
     '';
 
     extraConfig = ''
