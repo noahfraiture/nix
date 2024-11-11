@@ -1,3 +1,12 @@
 [submodule "dev-templates"]
 	path = shells/dev-templates
 	url = git@github.com:the-nix-way/dev-templates.git
+[submodule "wallpapers"]
+	path = modules/home-manager/wallpapers
+	url = git@github.com:noahfraiture/wallpapers.git
+[submodule "openvpn"]
+	path = openvpn
+	url = git@github.com:noahfraiture/openvpn.git
+[submodule "ssh"]
+	path = ssh
+	url = git@github.com:noahfraiture/ssh.git
