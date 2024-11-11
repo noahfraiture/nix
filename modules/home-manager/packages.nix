@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   config,
   lib,
   ...
@@ -36,6 +37,7 @@ let
     onefetch # Information about git repo
     powertop # Power tracker
     p7zip # zip tool
+    rainfrog # db management tool
     ripgrep # Search for substring
     yazi # file explorer
 
