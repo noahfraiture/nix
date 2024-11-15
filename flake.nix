@@ -20,7 +20,8 @@
 
     hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
 
-    ags.url = "github:Aylur/ags";
+    # NOTE : we pin ags since version 2.x.x is totally different and need to start config from scratch
+    ags.url = "github:Aylur/ags/ref=v1.8.2";
 
     stylix.url = "github:danth/stylix";
 
