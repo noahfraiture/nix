@@ -21,7 +21,7 @@
     hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
 
     # NOTE : we pin ags since version 2.x.x is totally different and need to start config from scratch
-    ags.url = "github:Aylur/ags/ref=v1.8.2";
+    ags.url = "github:Aylur/ags/?ref=v1.8.2";
 
     stylix.url = "github:danth/stylix";
 
@@ -69,7 +69,15 @@
             inputs.nix-flatpak.nixosModules.nix-flatpak
           ];
         };
-        # add here other machines
+      };
+      homeConfigurations = {
+        noah = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          modules = [
+            ./hosts/hostinger/home.nix
+            inputs.stylix.homeManagerModules.stylix
+          ];
+        };
       };
     };
 }
