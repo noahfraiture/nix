@@ -1,225 +1,284 @@
 import Gdk from "gi://Gdk";
-import { readJson, readJSONFile } from "utils/json"
+import { readJson, readJSONFile } from "utils/json";
 import { emptyWorkspace, globalMargin, newAppWorkspace } from "variables";
 import { closeProgress, openProgress } from "./Progress";
-import { containsProtocolOrTLD, formatToURL, getDomainFromURL } from "utils/url";
+import {
+  containsProtocolOrTLD,
+  formatToURL,
+  getDomainFromURL,
+} from "utils/url";
 import { arithmetic, containsOperator } from "utils/arithmetic";
-const Hyprland = await Service.import('hyprland')
-const { query } = await Service.import("applications")
+const Hyprland = await Service.import("hyprland");
+const { query } = await Service.import("applications");
 
-interface Result
-{
-    app_name: string,
-    app_exec: string,
-    app_arg?: string,
-    app_type?: string,
-    app_icon?: string
+interface Result {
+  app_name: string;
+  app_exec: string;
+  app_arg?: string;
+  app_type?: string;
+  app_icon?: string;
 }
 
-const Results = Variable<Result[]>([])
+const Results = Variable<Result[]>([]);
 
-function Entry()
-{
-    const help = Widget.Menu({
-        children: [
-            Widget.MenuItem({
-                child: Widget.Label({ xalign: 0, label: '... ... \t\t =>> \t open with argument' }),
-            }),
-            Widget.MenuItem({
-                child: Widget.Label({ xalign: 0, label: 'translate .. > .. \t =>> \t translate into (en,fr,es,de,pt,ru,ar...)' }),
-            }),
-            Widget.MenuItem({
-                child: Widget.Label({ xalign: 0, label: 'https://... \t\t =>> \t open link' }),
-            }),
-            Widget.MenuItem({
-                child: Widget.Label({ xalign: 0, label: '... .com \t\t =>> \t open link' }),
-            }),
-            Widget.MenuItem({
-                child: Widget.Label({ xalign: 0, label: '..*/+-.. \t\t =>> \t arithmetics' }),
-            }),
-            Widget.MenuItem({
-                child: Widget.Label({ xalign: 0, label: 'emoji ... \t\t =>> \t search emojis' }),
-            }),
-        ],
-    })
+function Entry() {
+  const help = Widget.Menu({
+    children: [
+      Widget.MenuItem({
+        child: Widget.Label({
+          xalign: 0,
+          label: "... ... \t\t =>> \t open with argument",
+        }),
+      }),
+      Widget.MenuItem({
+        child: Widget.Label({
+          xalign: 0,
+          label:
+            "translate .. > .. \t =>> \t translate into (en,fr,es,de,pt,ru,ar...)",
+        }),
+      }),
+      Widget.MenuItem({
+        child: Widget.Label({
+          xalign: 0,
+          label: "https://... \t\t =>> \t open link",
+        }),
+      }),
+      Widget.MenuItem({
+        child: Widget.Label({
+          xalign: 0,
+          label: "... .com \t\t =>> \t open link",
+        }),
+      }),
+      Widget.MenuItem({
+        child: Widget.Label({
+          xalign: 0,
+          label: "..*/+-.. \t\t =>> \t arithmetics",
+        }),
+      }),
+      Widget.MenuItem({
+        child: Widget.Label({
+          xalign: 0,
+          label: "emoji ... \t\t =>> \t search emojis",
+        }),
+      }),
+    ],
+  });
 
-    let debounceTimer: any
+  let debounceTimer: any;
 
-    return Widget.Box({
-        spacing: 5,
-        children: [
-            Widget.Icon({
-                class_name: "icon",
-                icon: "preferences-system-search-symbolic"
-            }),
-            Widget.Entry({
-                hexpand: true,
-                placeholder_text: "Search for an app, emoji, translate, url, or do some math...",
+  return Widget.Box({
+    spacing: 5,
+    children: [
+      Widget.Icon({
+        class_name: "icon",
+        icon: "preferences-system-search-symbolic",
+      }),
+      Widget.Entry({
+        hexpand: true,
+        placeholder_text:
+          "Search for an app, emoji, translate, url, or do some math...",
 
-                on_change: async ({ text }) =>
-                {
-                    // Clear any previously set timer
-                    if (debounceTimer) {
-                        clearTimeout(debounceTimer);
-                    }
+        on_change: async ({ text }) => {
+          // Clear any previously set timer
+          if (debounceTimer) {
+            clearTimeout(debounceTimer);
+          }
 
-                    // Set a new timer with a delay (e.g., 300ms)
-                    debounceTimer = setTimeout(async () =>
-                    {
-                        try {
+          // Set a new timer with a delay (e.g., 300ms)
+          debounceTimer = setTimeout(async () => {
+            try {
+              if (text == "" || text == " " || text == null) {
+                Results.value = [];
+                return;
+              }
+              const args: string[] = text.split(" ");
 
-                            if (text == "" || text == " " || text == null) {
-                                Results.value = [];
-                                return;
-                            }
-                            const args: string[] = text.split(" ");
-
-                            if (args[0].includes("translate")) {
-                                let language = text.includes(">") ? text.split(">")[1].trim() : "en";
-                                let sentence = text.split(">")[0].replaceAll("translate", "").replaceAll("'", "\\'").replaceAll('"', "\\\"").trim();
-                                Results.value = readJson(await Utils.execAsync(`bash ${App.configDir}/scripts/translate.sh ${language} ${sentence}`));
-                            } else if (args[0].includes("emoji")) {
-                                Results.value = readJSONFile(`${App.configDir}/assets/emojis/emojis.json`).filter(emoji => emoji.app_tags.toLowerCase().includes(text.replace("emoji", "").trim()));
-                            } else if (containsProtocolOrTLD(args[0])) {
-                                Results.value = [{ app_name: getDomainFromURL(text), app_exec: `xdg-open ${formatToURL(text)}`, app_type: 'url' }];
-                            } else if (containsOperator(args[0])) {
-                                Results.value = [{ app_name: arithmetic(text), app_exec: `wl-copy ${arithmetic(text)}`, app_type: 'calc' }];
-                            } else {
-                                Results.value = query(args.shift()).map((app) => ({
-                                    app_name: app.name,
-                                    app_exec: app.executable,
-                                    app_arg: args.join(""),
-                                    app_type: "app",
-                                    app_icon: app["icon-name"]
-                                }));
-                                if (Results.value.length == 0)
-                                    Results.value = [{ app_name: `Try ${text}`, app_exec: text, app_icon: "󰋖" }];
-                            }
-                        } catch (err) {
-                            print(err);
-                        }
-                    }, 100);  // 300ms delay
-                },
-                on_accept: () =>
-                {
-                    // Utils.notify({ summary: "Enter", body: String(ResultsDisplay.child.child.child.children[0].child) });
-                    (ResultsDisplay as any).child.child.child.children[0].child.clicked()
-                },
-            }).on("key-press-event", (self, event: Gdk.Event) =>
-            {
-                if (event.get_keyval()[1] == 65307) // Escape key
-                {
-                    self.text = ""
-                    App.closeWindow("app-launcher")
+              if (args[0].includes("translate")) {
+                const language = text.includes(">")
+                  ? text.split(">")[1].trim()
+                  : "en";
+                const sentence = text.split(">")[0].replaceAll("translate", "")
+                  .replaceAll("'", "\\'").replaceAll('"', '\\"').trim();
+                Results.value = readJson(
+                  await Utils.execAsync(
+                    `bash ${App.configDir}/scripts/translate.sh ${language} ${sentence}`,
+                  ),
+                );
+              } else if (args[0].includes("emoji")) {
+                Results.value = readJSONFile(
+                  `${App.configDir}/assets/emojis/emojis.json`,
+                ).filter((emoji) =>
+                  emoji.app_tags.toLowerCase().includes(
+                    text.replace("emoji", "").trim(),
+                  )
+                );
+              } else if (containsProtocolOrTLD(args[0])) {
+                Results.value = [{
+                  app_name: getDomainFromURL(text),
+                  app_exec: `xdg-open ${formatToURL(text)}`,
+                  app_type: "url",
+                }];
+              } else if (containsOperator(args[0])) {
+                Results.value = [{
+                  app_name: arithmetic(text),
+                  app_exec: `wl-copy ${arithmetic(text)}`,
+                  app_type: "calc",
+                }];
+              } else {
+                Results.value = query(args.shift()).map((app) => ({
+                  app_name: app.name,
+                  app_exec: app.executable,
+                  app_arg: args.join(""),
+                  app_type: "app",
+                  app_icon: app["icon-name"],
+                }));
+                if (Results.value.length == 0) {
+                  Results.value = [{
+                    app_name: `Try ${text}`,
+                    app_exec: text,
+                    app_icon: "󰋖",
+                  }];
                 }
-            })
-            , Widget.Button({
-                label: "󰋖",
-                on_primary_click: (_, event) =>
-                {
-                    help.popup_at_pointer(event)
-                },
-            })
-        ]
-    })
-}
-
-const organizeResults = (results: Result[]) =>
-{
-    const buttonContent = (element: Result) => Widget.Box({
-        spacing: 10,
-        hpack: element.app_type == 'emoji' ? "center" : "start",
-        children: [
-            element.app_type == 'app' ? Widget.Icon({ icon: element.app_icon || "view-grid-symbolic" }) : Widget.Label({ label: element.app_icon }),
-            Widget.Label({ label: element.app_name }),
-            Widget.Label({ class_name: "argument", label: element.app_arg || "" })
-        ],
-    })
-
-    const button = (element: Result) => Widget.Button({
-        hexpand: true,
-        child: buttonContent(element),
-        on_clicked: () =>
-        {
-            if (element.app_type == "app") {
-                openProgress()
-                Utils.execAsync(`bash ${App.configDir}/scripts/app-loading-progress.sh ${element.app_name}`)
-                    .then((workspace) => newAppWorkspace.value = Number(workspace))
-                    .finally(() => closeProgress())
-                    .catch(err => Utils.notify({ summary: "Error", body: err }));
+              }
+            } catch (err) {
+              print(err);
             }
-
-            Hyprland.messageAsync(`dispatch exec ${element.app_exec} ${element.app_arg || ""}`)
-                .then(() =>
-                {
-                    switch (element.app_type) {
-                        case 'app':
-                            // Utils.notify({ summary: "App", body: `Opening ${element.app_name}` });
-                            break;
-                        case 'url':
-                            let browser = Utils.exec(`bash -c "xdg-settings get default-web-browser | sed 's/\.desktop$//'"`);
-                            Utils.notify({ summary: "URL", body: `Opening ${element.app_name} in ${browser}` });
-                            break;
-                        default:
-                            break;
-                    }
-                })
-                .finally(() => App.closeWindow("app-launcher"))
-                .catch(err => Utils.notify({ summary: "Error", body: err }));
+          }, 100); // 300ms delay
         },
-    })
-
-    if (results.length == 0) return Widget.Box()
-
-    const rows = Widget.Box({
-        class_name: "results",
-        vertical: true,
-        vexpand: true,
-        hexpand: true,
-    })
-    const columns: number = results[0].app_type == "emoji" ? 4 : 2
-
-    for (let i = 0; i < results.length; i += columns) {
-        const rowResults = results.slice(i, i + columns)
-        rows.pack_end(Widget.Box({
-            vertical: false,
-            spacing: 5,
-            children: rowResults.map(element => button(element))
-        }), false, false, 0)
-    }
-
-    const maxHeight = 500
-
-    return Widget.Scrollable({
-        // hscroll: 'never',
-        vexpand: true,
-        hexpand: true,
-        css: `min-height: ${rows.children.length * 50 > maxHeight ? maxHeight : rows.children.length * 50}px`,
-        child: rows
-    })
+        on_accept: () => {
+          // Utils.notify({ summary: "Enter", body: String(ResultsDisplay.child.child.child.children[0].child) });
+          (ResultsDisplay as any).child.child.child.children[0].child.clicked();
+        },
+      }).on("key-press-event", (self, event: Gdk.Event) => {
+        if (event.get_keyval()[1] == 65307) { // Escape key
+          self.text = "";
+          App.closeWindow("app-launcher");
+        }
+      }),
+      Widget.Button({
+        label: "󰋖",
+        on_primary_click: (_, event) => {
+          help.popup_at_pointer(event);
+        },
+      }),
+    ],
+  });
 }
+
+const organizeResults = (results: Result[]) => {
+  const buttonContent = (element: Result) =>
+    Widget.Box({
+      spacing: 10,
+      hpack: element.app_type == "emoji" ? "center" : "start",
+      children: [
+        element.app_type == "app"
+          ? Widget.Icon({ icon: element.app_icon || "view-grid-symbolic" })
+          : Widget.Label({ label: element.app_icon }),
+        Widget.Label({ label: element.app_name }),
+        Widget.Label({ class_name: "argument", label: element.app_arg || "" }),
+      ],
+    });
+
+  const button = (element: Result) =>
+    Widget.Button({
+      hexpand: true,
+      child: buttonContent(element),
+      on_clicked: () => {
+        if (element.app_type == "app") {
+          openProgress();
+          Utils.execAsync(
+            `bash ${App.configDir}/scripts/app-loading-progress.sh ${element.app_name}`,
+          )
+            .then((workspace) => newAppWorkspace.value = Number(workspace))
+            .finally(() => closeProgress())
+            .catch((err) => Utils.notify({ summary: "Error", body: err }));
+        }
+
+        Hyprland.messageAsync(
+          `dispatch exec ${element.app_exec} ${element.app_arg || ""}`,
+        )
+          .then(() => {
+            switch (element.app_type) {
+              case "app":
+                // Utils.notify({ summary: "App", body: `Opening ${element.app_name}` });
+                break;
+              case "url":
+                let browser = Utils.exec(
+                  `bash -c "xdg-settings get default-web-browser | sed 's/\.desktop$//'"`,
+                );
+                Utils.notify({
+                  summary: "URL",
+                  body: `Opening ${element.app_name} in ${browser}`,
+                });
+                break;
+              default:
+                break;
+            }
+          })
+          .finally(() => App.closeWindow("app-launcher"))
+          .catch((err) => Utils.notify({ summary: "Error", body: err }));
+      },
+    });
+
+  if (results.length == 0) return Widget.Box();
+
+  const rows = Widget.Box({
+    class_name: "results",
+    vertical: true,
+    vexpand: true,
+    hexpand: true,
+  });
+  const columns: number = results[0].app_type == "emoji" ? 4 : 2;
+
+  for (let i = 0; i < results.length; i += columns) {
+    const rowResults = results.slice(i, i + columns);
+    rows.pack_end(
+      Widget.Box({
+        vertical: false,
+        spacing: 5,
+        children: rowResults.map((element) => button(element)),
+      }),
+      false,
+      false,
+      0,
+    );
+  }
+
+  const maxHeight = 500;
+
+  return Widget.Scrollable({
+    // hscroll: 'never',
+    vexpand: true,
+    hexpand: true,
+    css: `min-height: ${
+      rows.children.length * 50 > maxHeight
+        ? maxHeight
+        : rows.children.length * 50
+    }px`,
+    child: rows,
+  });
+};
 
 const ResultsDisplay = Widget.Box({
-    child: Results.bind().as(organizeResults)
-})
+  child: Results.bind().as(organizeResults),
+});
 
-export default () =>
-{
-    return Widget.Window({
-        name: `app-launcher`,
-        anchor: emptyWorkspace.as(empty => empty == 1 ? [] : ["top", "left"]),
-        exclusivity: "normal",
-        keymode: "on-demand",
-        layer: "top",
-        margins: [10, globalMargin, globalMargin, globalMargin], // top right bottom left
-        visible: false,
+export default () => {
+  return Widget.Window({
+    name: `app-launcher`,
+    anchor: emptyWorkspace.as((empty) => empty == 1 ? [] : ["top", "left"]),
+    exclusivity: "normal",
+    keymode: "on-demand",
+    layer: "top",
+    margins: [10, globalMargin, globalMargin, globalMargin], // top right bottom left
+    visible: false,
 
-        child: Widget.EventBox({
-            child: Widget.Box({
-                vertical: true,
-                class_name: "app-launcher",
-                children: [Entry(), ResultsDisplay],
-            }),
-        }),
-    })
-}
+    child: Widget.EventBox({
+      child: Widget.Box({
+        vertical: true,
+        class_name: "app-launcher",
+        children: [Entry(), ResultsDisplay],
+      }),
+    }),
+  });
+};

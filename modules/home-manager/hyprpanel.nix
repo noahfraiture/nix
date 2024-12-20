@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   ...
@@ -13,7 +14,7 @@ let
   surface2 = "#${config.lib.stylix.colors.base04}";
   text = "#${config.lib.stylix.colors.base05}";
   rosewater = "#${config.lib.stylix.colors.base06}";
-  lavender = "#${config.lib.stylix.colors.base07}";
+  _lavender = "#${config.lib.stylix.colors.base07}";
 
   red = "#${config.lib.stylix.colors.base08}";
   peach = "#${config.lib.stylix.colors.base09}";
@@ -22,12 +23,18 @@ let
   teal = "#${config.lib.stylix.colors.base0C}";
   blue = "#${config.lib.stylix.colors.base0D}";
   purple = "#${config.lib.stylix.colors.base0E}";
-  flamingo = "#${config.lib.stylix.colors.base0F}";
+  _flamingo = "#${config.lib.stylix.colors.base0F}";
 
   font = "${config.stylix.fonts.monospace.name}";
   fontSize = "${toString config.stylix.fonts.sizes.desktop}";
 in
 {
+
+  home.packages = with pkgs; [
+    hyprpicker
+    gpu-screen-recorder
+  ];
+
   wayland.windowManager.hyprland.settings.exec-once = [ "hyprpanel -b hypr" ];
 
   home.activation = {
@@ -107,8 +114,8 @@ in
           "menus.dashboard.directories.left.directory2.command": "kitty ${config.home.homeDirectory}/Documents/",
           "menus.dashboard.directories.left.directory3.label": "󰉏 Pictures",
           "menus.dashboard.directories.left.directory3.command": "kitty ${config.home.homeDirectory}/Pictures/",
-          "menus.dashboard.directories.right.directory1.label": "󱂵 Home",
-          "menus.dashboard.directories.right.directory1.command": "kitty ${config.home.homeDirectory}/",
+          "menus.dashboard.directories.right.directory1.label": "󱄅 Nix",
+          "menus.dashboard.directories.right.directory1.command": "kitty ${config.home.homeDirectory}/Nix/",
           "menus.dashboard.directories.right.directory2.label": "󰚝 Projects",
           "menus.dashboard.directories.right.directory2.command": "kitty ${config.home.homeDirectory}/Projects/",
           "menus.dashboard.directories.right.directory3.label": "󰉏 Videos",

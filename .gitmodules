@@ -2,5 +2,5 @@
 	path = shells/dev-templates
 	url = git@github.com:the-nix-way/dev-templates.git
 [submodule "wallpapers"]
-	path = modules/home-manager/wallpapers
+	path = wallpapers
 	url = git@github.com:noahfraiture/wallpapers.git

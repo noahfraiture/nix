@@ -40,38 +40,38 @@
       "github.com" = {
         user = "git";
         hostname = "github.com";
-        identityFile = "/home/noah/nix/ssh/github";
+        identityFile = "/home/noah/Nix/ssh/github";
       };
       "hostinger" = {
         user = "noah";
-        hostname = "";
-        identityFile = "/home/noah/nix/ssh/hostinger";
+        hostname = "127.0.0.1";
+        identityFile = "/home/noah/Nix/ssh/hostinger";
       };
       "askdia" = {
         user = "noah";
-        hostname = "";
-        identityFile = "/home/noah/nix/ssh/askdia";
+        hostname = "127.0.0.1";
+        identityFile = "/home/noah/Nix/ssh/askdia";
       };
       "bitfenix" = {
         user = "noah";
         hostname = "100.74.217.51";
-        identityFile = "/home/noah/nix/ssh/bitfenix";
+        identityFile = "/home/noah/Nix/ssh/bitfenix";
       };
       "studssh" = {
         user = "nfraiture";
         hostname = "studssh.info.ucl.ac.be";
-        identityFile = "/home/noah/nix/ssh/studssh";
+        identityFile = "/home/noah/Nix/ssh/studssh";
       };
       "didac" = {
         user = "nfraiture";
         hostname = "didac13.info.ucl.ac.be";
-        identityFile = "/home/noah/nix/ssh/studssh";
+        identityFile = "/home/noah/Nix/ssh/studssh";
         proxyJump = "studssh";
       };
       "forge" = {
         user = "git";
         hostname = "forge.uclouvain.be";
-        identityFile = "/home/noha/nix/ssh/forge";
+        identityFile = "/home/noah/Nix/ssh/forge";
       };
     };
   };

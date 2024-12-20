@@ -13,12 +13,8 @@ let
     lutris-unwrapped
     onlyoffice-bin
     opera
-    protonmail-desktop
-    proton-pass
-    protonvpn-gui
     qbittorrent
     quickemu
-    spotify
     vlc
     vscode
     zed-editor
@@ -78,7 +74,6 @@ in
     programs.lazygit = lib.mkIf config.lazygit.enable {
       enable = true;
       settings = {
-        os.editPreset = "hx";
         services."github.com" = "github:github.com";
         notARepository = "skip";
       };

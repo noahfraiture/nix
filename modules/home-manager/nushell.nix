@@ -1,4 +1,5 @@
-{ lib, config, ... }: {
+{ lib, config, ... }:
+{
 
   programs.zoxide.enableNushellIntegration = true;
   programs.atuin.enableNushellIntegration = true;
@@ -24,7 +25,7 @@
         $env.EDITOR = "hx"
         $env.VISUAL = "hx"
 
-        def rebuild [name] = {sudo nixos-rebuild switch --flake $"/etc/nixos/#($name)"}
+        def rebuild [] = {sudo nixos-rebuild switch --flake $"/home/noah/Nix"}
 
         # use wlan on local network to awake bitfenix server.
         # Must be on same local network
@@ -104,6 +105,7 @@
       '';
 
     shellAliases = {
+      nsh = "nix-shell --command nu";
       lg = lib.mkIf config.lazygit.enable "lazygit";
       ld = "lazydocker";
       cd = "__zoxide_z";
@@ -113,6 +115,8 @@
       develop = "nix develop -c nu";
     };
 
-    environmentVariables = { DIRENV_LOG_FORMAT = "''"; };
+    environmentVariables = {
+      DIRENV_LOG_FORMAT = "''";
+    };
   };
 }

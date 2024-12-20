@@ -52,7 +52,8 @@
           name = "JetBrainsMono Nerd Font Propo";
         };
         sizes = {
-          desktop = 16;
+          desktop = 11;
+          terminal = 11;
         };
       };
     };

@@ -68,7 +68,10 @@ in
 
   config = {
 
-    home.packages = [ inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent ];
+    home.packages = [
+      inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent
+      pkgs.cliphist
+    ];
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -84,6 +87,8 @@ in
           "hyprctl setcursor Qogir 24"
           "systemctl --user start hyprpolkitagent"
           "sleep 3 && swww-daemon"
+          "wl-paste --type text --watch cliphist store"
+          "wl-paste --type image --watch cliphist store"
         ] ++ (if config.hyprlock.enable then [ "${pkgs.hyprlock}/bin/hyprlock --immediate" ] else [ ]);
 
         plugin = {
@@ -185,7 +190,7 @@ in
 
         xwayland.force_zero_scaling = true;
 
-        "$mod" = "ALT";
+        "$mod" = "SUPER";
 
         bindm = [
           # Move/Resize focused window
@@ -201,7 +206,7 @@ in
           "$mod, F, fullscreen," # toggle the window between focus and fullscreen
           ''$mod, P, exec, ${pinScript}/bin/pin'' # toggle pin on focused window
           "$mod, B, exec, hyprctl setprop active opaque toggle" # toggle opaque on window
-          "$mod, ESCAPE, exec, hyprpanel -t powermenu"
+          "$mod, ESCAPE, exec, hyprpanel -b hypr -t powermenu"
           "$mod, TAB, overview:toggle"
           ''$mod, Z, exec, ${zenScript}/bin/zen'' # Zen mode
 

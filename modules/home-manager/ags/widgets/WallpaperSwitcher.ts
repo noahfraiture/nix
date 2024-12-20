@@ -2,14 +2,16 @@ import { globalTransition } from "variables";
 
 const directories = (): { [key: string]: string[] } => {
   const dirs: { [key: string]: string[] } = {};
-  Utils.exec(`ls ${App.configDir}/wallpapers`)
+  Utils.exec(`ls /home/noah/Nix/wallpapers`)
     .split("\n")
     .map((dir: string) => {
-      const key = `${App.configDir}/wallpapers/${dir}`;
-      const values = Utils.exec(`ls ${App.configDir}/wallpapers/${dir}`)
+      const key = `/home/noah/Nix/wallpapers/${dir}`;
+      const values = Utils.exec(
+        `ls /home/noah/Nix/wallpapers/${dir}`,
+      )
         .split("\n")
         .map((wallpaper: string) =>
-          `${App.configDir}/wallpapers/${dir}/${wallpaper}`
+          `/home/noah/Nix/wallpapers/${dir}/${wallpaper}`
         );
       dirs[key] = values;
     });

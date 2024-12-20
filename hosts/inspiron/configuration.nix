@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -13,12 +18,20 @@
     ./hyprland.nix
 
     ../../modules/nixos/default.nix
-    ../../modules/nixos/kanata.nix
     ../../modules/nixos/stylix.nix
     ../../modules/nixos/hyprpanel.nix
-    ../../modules/nixos/openvpn.nix
+    # ../../modules/nixos/openvpn.nix
     # ../../modules/nixos/tailscale.nix
   ];
+
+  # Create a file /etc/current-system-packages with all the installed packages
+  environment.etc."current-system-packages".text =
+    let
+      packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+      sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
+      formatted = builtins.concatStringsSep "\n" sortedUnique;
+    in
+    formatted;
 
   greetd.enable = true;
   sddm.enable = false;
