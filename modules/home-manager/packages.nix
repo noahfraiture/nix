@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   config,
   lib,
   ...
@@ -10,13 +9,13 @@ let
 
   gui = with pkgs; [
     # Gui
-
-    bruno
     firefox-devedition
-    gparted # FIXME ? 
-    obsidian
+    lutris-unwrapped
     onlyoffice-bin
     opera
+    protonmail-desktop
+    proton-pass
+    protonvpn-gui
     qbittorrent
     quickemu
     spotify
@@ -37,7 +36,6 @@ let
     onefetch # Information about git repo
     powertop # Power tracker
     p7zip # zip tool
-    rainfrog # db management tool
     ripgrep # Search for substring
     yazi # file explorer
 
@@ -49,7 +47,6 @@ let
     deno
     go
     python3
-    texliveFull
   ];
 
 in

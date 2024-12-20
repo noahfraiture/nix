@@ -3,6 +3,22 @@
 {
   stylix.targets.helix.enable = false;
 
+  home.file.".config/helix/yazi-picker.sh" = {
+    text = # bash
+    ''
+    paths=$(yazi --chooser-file=/dev/stdout | while read -r; do printf "%q " "$REPLY"; done)
+
+    if [[ -n "$paths" ]]; then
+      zellij action toggle-floating-panes
+      zellij action write 27 # send <Escape> key
+      zellij action write-chars ":$1 $paths"
+      zellij action write 13 # send <Enter> key
+    else
+      zellij action toggle-floating-panes
+    fi
+    '';
+  };
+
   programs.helix = {
     enable = true;
     defaultEditor = true;
@@ -12,8 +28,6 @@
       theme = "stylix";
 
       editor = {
-        line-number = "relative";
-        rulers = [ 100 ];
         color-modes = true;
         completion-timeout = 100;
 
@@ -32,10 +46,20 @@
             ":w"
             "normal_mode"
           ];
+          "C-a" = [
+            ":wa"
+            "normal_mode"
+          ];
+          "C-f" = [
+            ":fmt"
+            "normal_mode"
+          ];
         };
 
         normal = {
           "C-s" = [ ":w" ];
+          "C-a" = [ ":wa" ];
+          "C-f" = [ ":fmt" ];
           "C-j" = "jump_view_down";
           "C-k" = "jump_view_up";
           "C-h" = "jump_view_left";
@@ -45,14 +69,14 @@
             "open_below"
             "normal_mode"
           ];
-          "S-ret" = [
+          "C-ret" = [
             "open_above"
             "normal_mode"
           ];
 
-          "'" = [ "expand_selection" ];
-          "C-'" = [ "shrink_selection" ];
-          "C-;" = [ "flip_selections" ];
+          "'" =  "expand_selection" ;
+          "C-'" =  "shrink_selection" ;
+          "C-;" =  "flip_selections" ;
           "C-x" = "split_selection_on_newline";
           "C-X" = "merge_selections";
           "C-i" = "save_selection";
@@ -75,6 +99,7 @@
             ];
             "f" = "file_picker_in_current_directory";
             "F" = "file_picker";
+            "e" = ":sh zellij run -c -f -x 10% -y 10% --width 80% --height 80% -- bash ~/.config/helix/yazi-picker.sh open";
           };
         };
       };

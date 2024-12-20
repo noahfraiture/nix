@@ -1,5 +1,8 @@
 { ... }:
 {
+
+  programs.openvpn3.enable = true;
+
   services.openvpn.servers = {
     askdia = {
       config = '' config /home/noah/nix/openvpn/askdia.conf '';

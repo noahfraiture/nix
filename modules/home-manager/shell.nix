@@ -4,7 +4,6 @@
 }:
 {
   home.packages = with pkgs; [
-    # pokemon-colorscripts-mac # Display pokemon
     zoxide # Smarter cd
   ];
 
@@ -41,10 +40,40 @@
       "github.com" = {
         user = "git";
         hostname = "github.com";
-        identityFile = "/home/noah/.ssh/github";
+        identityFile = "/home/noah/nix/ssh/github";
+      };
+      "hostinger" = {
+        user = "noah";
+        hostname = "";
+        identityFile = "/home/noah/nix/ssh/hostinger";
+      };
+      "askdia" = {
+        user = "noah";
+        hostname = ""; # TODO : ad
+        identityFile = "/home/noah/nix/ssh/askdia";
+      };
+      "bitfenix" = {
+        user = "noah";
+        hostname = "100.74.217.51";
+        identityFile = "/home/noah/nix/ssh/bitfenix";
+      };
+      "studssh" = {
+        user = "nfraiture";
+        hostname = "studssh.info.ucl.ac.be";
+        identityFile = "/home/noah/nix/ssh/studssh";
+      };
+      "didac" = {
+        user = "nfraiture";
+        hostname = "didac13.info.ucl.ac.be";
+        identityFile = "/home/noah/nix/ssh/studssh";
+        proxyJump = "studssh";
+      };
+      "forge" = {
+        user = "git";
+        hostname = "forge.uclouvain.be";
+        IdentityFile = "/home/noha/nix/ssh/forge";
       };
     };
-    # TODO : ssh config
   };
   services.ssh-agent.enable = true;
 }

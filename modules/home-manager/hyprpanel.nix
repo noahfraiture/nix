@@ -5,10 +5,6 @@
 }:
 let
 
-  # Bonus not handled by stylix only for gruvbox
-  # Other theme would require other value so it might not be convenient
-  # WARN : every color is slightly different :) as stylix only use base16 colors
-
   base = "#${config.lib.stylix.colors.base00}";
   mantle = "#${config.lib.stylix.colors.base01}";
   surface0 = "#${config.lib.stylix.colors.base02}";
@@ -55,10 +51,8 @@ in
     ] ''run rm -rf ${config.home.homeDirectory}/.cache/ags/hyprpanel'';
   };
 
-  # "*" mean : all monitors. We cna provide specific monitors with its number.
+  # "*" mean : all monitors. We can provide specific monitors with its number.
   # e.g. "2": {"left": []}
-  # TODO : use json
-  # TODO : reload `ags -q; ags`
   home.file.".cache/ags/hyprpanel/options.json" = {
     text = # json
       ''

@@ -13,9 +13,10 @@
     ./hyprland.nix
 
     ../../modules/nixos/default.nix
+    ../../modules/nixos/kanata.nix
     ../../modules/nixos/stylix.nix
     ../../modules/nixos/hyprpanel.nix
-    # ../../modules/nixos/openvpn.nix
+    ../../modules/nixos/openvpn.nix
     # ../../modules/nixos/tailscale.nix
   ];
 
@@ -23,7 +24,6 @@
   sddm.enable = false;
   fonts.enable = true;
   graphical.enable = true;
-  # steam.enable = true;
 
   time.timeZone = "Europe/Brussels";
   i18n.defaultLocale = "en_US.UTF-8";

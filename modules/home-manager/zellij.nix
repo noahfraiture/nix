@@ -30,6 +30,12 @@ let
 
         bind "Alt f" { ToggleFocusFullscreen; }
         bind "Alt c" { Clear; }
+
+        bind "Alt Shift h" { MovePane "Left"; }
+        bind "Alt Shift l" { MovePane "Right"; }
+        bind "Alt Shift k" { MovePane "Up"; }
+        bind "Alt Shift j" { MovePane "Down"; }
+
       }
       pane {
         bind "h" { NewPane "Left"; }
