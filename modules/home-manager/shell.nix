@@ -49,7 +49,7 @@
       };
       "askdia" = {
         user = "noah";
-        hostname = ""; # TODO : ad
+        hostname = "";
         identityFile = "/home/noah/nix/ssh/askdia";
       };
       "bitfenix" = {
@@ -71,7 +71,7 @@
       "forge" = {
         user = "git";
         hostname = "forge.uclouvain.be";
-        IdentityFile = "/home/noha/nix/ssh/forge";
+        identityFile = "/home/noha/nix/ssh/forge";
       };
     };
   };
