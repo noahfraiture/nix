@@ -90,7 +90,8 @@
 
         # This will be used in starship with PKGS to get the packes in shell
         def nsh [...args] {
-            nix-shell --command $'nu -e "\$env.PKGS = ($args)"' -p ...$args
+            let pkgs = if ($args | length) > 2 {$args | length | into string} else {$args | str join ','}
+            nix-shell --command $'nu -e "\$env.PKGS = \"$pkgs\""' -p ...$args
         }
       '';
 

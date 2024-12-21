@@ -84,6 +84,13 @@ in
       sourceFirst = false;
 
       settings = {
+
+        monitor = [
+          "eDP-1, 2560x1600@120, 0x500, 1.25"
+          "DP-3, 3440x1440@100, 2048x0, 1"
+          "HDMI-A-2, 1920x1080, 5488x200, 1"
+        ];
+
         exec-once = [
           "hyprctl setcursor Qogir 24"
           "systemctl --user start hyprpolkitagent"

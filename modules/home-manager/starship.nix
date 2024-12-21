@@ -15,7 +15,7 @@ let
       + "$username"
       + "$hostname"
       + "$localip"
-      + "$custom"
+      + "$env_var"
       + "$git_status"
       + "$directory"
       + "$git_commit$git_state$git_metrics"
@@ -196,7 +196,7 @@ let
     };
 
     status = {
-      format = "[$symbol]($style)[$status](fg:sec bg:prim)";
+      format = "[$symbol]($style)[$status](fg:red bg:prim)";
       style = "fg:sudo bg:prim";
       symbol = "  ";
       disabled = false;
@@ -229,10 +229,18 @@ let
         "nu"
         "-c"
       ];
-      when = ''use std assert; "PKGS" in $env | assert $in'';
-      # command = "$env.PKGS | each {|| print}";
-      command = "echo HELLO";
+      when = # nu
+        ''use std assert; let present = 'PKGS' in $env; assert true'';
+      command = # nu
+        ''let present = "PKGS" in $env; echo $present'';
       format = "[$symbol($output)]($style)";
+      style = "fg:prim bg:sec";
+    };
+
+    env_var.NIXSHELL = {
+      variable = "PKGS";
+      default = "";
+      format = "[$symbol($env_value)]($style)";
       style = "fg:prim bg:sec";
     };
   };
