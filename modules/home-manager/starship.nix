@@ -15,6 +15,7 @@ let
       + "$username"
       + "$hostname"
       + "$localip"
+      + "$custom"
       + "$git_status"
       + "$directory"
       + "$git_commit$git_state$git_metrics"
@@ -172,8 +173,11 @@ let
     directory.substitutions = {
       "Documents" = "󰈙 ";
       "Downloads" = " ";
+      "Projects" = " ";
       "Music" = " ";
       "Pictures" = " ";
+      "Videos" = "󰿎 ";
+      "Nix" = "󱄅 ";
       ".config" = ". ";
     };
 
@@ -181,7 +185,6 @@ let
       format = "[](fg:tert bg:prim)[$symbol $branch(:$remote_branch)]($style)[](fg:tert bg:prim)";
       style = "fg:prim bold bg:tert";
       symbol = "";
-      #ignore_branches = ["master", "main"];
     };
 
     memory_usage = {
@@ -193,7 +196,7 @@ let
     };
 
     status = {
-      format = "[$symbol]($style)";
+      format = "[$symbol]($style)[$status](fg:sec bg:prim)";
       style = "fg:sudo bg:prim";
       symbol = "  ";
       disabled = false;
@@ -218,6 +221,19 @@ let
       vimcmd_replace_one_symbol = "[ ](bold fg:purple)";
       vimcmd_replace_symbol = "[ ](bold fg:purple)";
       vimcmd_visual_symbol = "[ ](bold fg:yellow)";
+    };
+
+    custom.nixshell = {
+      disabled = false;
+      shell = [
+        "nu"
+        "-c"
+      ];
+      when = ''use std assert; "PKGS" in $env | assert $in'';
+      # command = "$env.PKGS | each {|| print}";
+      command = "echo HELLO";
+      format = "[$symbol($output)]($style)";
+      style = "fg:prim bg:sec";
     };
   };
 

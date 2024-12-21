@@ -71,6 +71,7 @@ in
     home.packages = [
       inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent
       pkgs.cliphist
+      pkgs.playerctl
     ];
 
     wayland.windowManager.hyprland = {
@@ -220,8 +221,6 @@ in
           # TODO : swww + wallbash or stylix to change theme
           # TODO : clipboard
 
-          # F# controls (mostly not bind)
-
           # === WINDOWS MANAGEMENTS - Super (Shift to drag) ===
 
           # Move/Change window focus (can cross monitors)
@@ -302,6 +301,21 @@ in
           "$mod&Control_L, 8, workspace, 8"
           "$mod&Control_L, 9, workspace, 9"
           "$mod&Control_L, 0, workspace, 10"
+        ];
+
+        bindl = [
+          ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ",XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause" # Play/Pause Song
+          ",XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next" # Next Song
+          ",XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous" # Previous Song
+          ",switch:Lid Switch, exec, ${pkgs.hyprlock}/bin/hyprlock" # Lock when closing Lid
+        ];
+
+        bindle = [
+          ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+          ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          ",XF86MonBrightnessUp, exec, brightnessctl set +5%" # Brightness Up
+          ",XF86MonBrightnessDown, exec, brightnessctl set 5%-" # Brightness Down
         ];
 
         source = [

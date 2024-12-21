@@ -87,6 +87,11 @@
         def zei [...args] {
             zellij edit --in-place ($args | str join ' ')
         }
+
+        # This will be used in starship with PKGS to get the packes in shell
+        def nsh [...args] {
+            nix-shell --command $'nu -e "\$env.PKGS = ($args)"' -p ...$args
+        }
       '';
 
     extraConfig = # nu
@@ -105,7 +110,6 @@
       '';
 
     shellAliases = {
-      nsh = "nix-shell --command nu";
       lg = lib.mkIf config.lazygit.enable "lazygit";
       ld = "lazydocker";
       cd = "__zoxide_z";
